@@ -13,14 +13,15 @@
   <p>
     <a href="https://sylobeam.pages.dev/"><strong>Open Web App</strong></a> ·
     <a href="#how-it-works">How It Works</a> ·
-    <a href="#windows-desktop-app">Windows App</a> ·
-    <a href="#tiếng-việt-giới-thiệu-nhanh">Tiếng Việt</a>
+    <a href="#option-2-windows-desktop-app-60hz-dxgi-remote-control--auto-save-folder">Windows App</a> ·
+    <a href="https://github.com/nghtrung180905-afk/sylobeam/releases/latest"><strong>Download Release</strong></a> ·
+    <a href="#tiếng-việt--giới-thiệu-nhanh">Tiếng Việt</a>
   </p>
 </div>
 
 ---
 
-![SyloBeam Dark Mode Preview](./docs/preview-dark.png)
+![SyloBeam English Dark Mode Preview](./docs/preview-en.png)
 
 ## Why SyloBeam?
 
@@ -31,7 +32,7 @@
 * **Works Behind Strict 4G/5G NAT:** Automatically upgrades or falls back to a stateless **Cloudflare Edge E2EE WebSocket Relay** (Durable Objects) when symmetric mobile NAT blocks direct WebRTC.
 * **60Hz Remote Desktop (PC ↔ Mobile/Web):** Native **DXGI Desktop Duplication (`IDXGIOutputDuplication`)** + WebRTC hardware video encoding + unordered low-latency UDP DataChannel for responsive touch/trackpad mouse, pinch-to-zoom, and full Vietnamese/Unicode keyboard input.
 * **End-to-End Security:** Encrypted transport (**DTLS 1.3 / AES-256-GCM**), **6-digit SAS** verification code, **two-way explicit consent** before any file transfer or remote control, **SHA-256** per-file integrity check, and instant **`Ctrl + Alt + Esc`** emergency kill switch on PC.
-* **Modern UI:** Dual **Dark Mode** & **Lightning (Light) Mode**, real-time **WebGL 3D NASA Blue Marble Earth** with rotating satellite cloud layer, custom download folder picker, and installable PWA.
+* **Modern Studio UI:** Built-in **English / Tiếng Việt** language switcher in Settings, dual **Dark Mode** & **Lightning (Light) Mode**, real-time **WebGL 3D NASA Blue Marble Earth** with rotating satellite cloud layer, custom download folder picker, and installable PWA.
 
 ---
 
@@ -109,7 +110,10 @@ npx wrangler deploy
 * **Truyền ảnh gốc, video, file dung lượng lớn không giới hạn:** Chạy thẳng giữa điện thoại và máy tính qua Wi-Fi/LAN hoặc tự động xuyên mạng 4G/5G.
 * **Điều khiển PC mượt 60Hz từ điện thoại:** Hỗ trợ cảm ứng trực tiếp & trackpad, phóng to/thu nhỏ 2 ngón, gõ tiếng Việt đầy đủ, chụp màn hình siêu nhanh bằng DXGI GPU.
 * **Bảo mật đầu-cuối:** Mã hóa DTLS / AES-256-GCM, mã xác thực 6 số SAS, hỏi xác nhận hai chiều, kiểm tra toàn vẹn SHA-256 từng file và phím tắt ngắt khẩn cấp `Ctrl + Alt + Esc`.
-* **Dùng ngay:** Truy cập **[https://sylobeam.pages.dev/](https://sylobeam.pages.dev/)** hoặc tải bộ cài Windows **`SyloBeam-Setup.exe`**.
+* **Giao diện song ngữ & 3D:** Hỗ trợ chuyển **Tiếng Việt / English** trong Cài đặt, chế độ tối **Dark** & sáng **Lightning**, mô phỏng Trái Đất 3D vệ tinh NASA theo thời gian thực.
+* **Dùng ngay:** Truy cập **[https://sylobeam.pages.dev/](https://sylobeam.pages.dev/)** hoặc tải bộ cài Windows **`SyloBeam-Setup.exe`** từ trang [Releases](https://github.com/nghtrung180905-afk/sylobeam/releases/latest).
+
+![SyloBeam Vietnamese Dark Mode Preview](./docs/preview-dark.png)
 
 ---
 
