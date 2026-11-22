@@ -16,7 +16,7 @@ namespace SwiftDropInstaller
     {
         public const string ResourceName = "SwiftDropPayload.zip";
         public const string UninstallRegPath = @"Software\Microsoft\Windows\CurrentVersion\Uninstall\SyloBeam";
-        public const string AppVersion = "2.0.0";
+        public const string AppVersion = "2.1.0";
 
         public static string GetDefaultInstallDir()
         {

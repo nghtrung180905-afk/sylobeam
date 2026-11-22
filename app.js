@@ -132,6 +132,260 @@
   const STORAGE_KEY_AUTO_RECONNECT = 'swiftdrop_auto_reconnect_v1';
   const STORAGE_KEY_SECURITY_PIN = 'swiftdrop_security_pin_v1';
   const STORAGE_KEY_THEME = 'swiftdrop_theme_v1';
+  const STORAGE_KEY_LANG = 'sylobeam_lang_v1';
+
+  const I18N = {
+    vi: {
+      page_title: 'SyloBeam — Chia Sẻ File & Ảnh P2P Tốc Độ Cao',
+      header_code: 'Mã',
+      header_download_app: 'Tải App',
+      header_copy_link: 'Copy Link',
+      header_show_qr: 'Hiện QR',
+      header_share: 'Chia sẻ',
+      header_install_pwa: 'Cài App',
+      title_copy_id: 'Sao chép mã phòng',
+      title_regen_id: 'Đổi mã phòng mới',
+      title_download_app: 'Tải bộ cài đặt SyloBeam cho Windows (.EXE)',
+      title_copy_link: 'Sao chép đường dẫn kết nối nhanh',
+      title_show_qr: 'Hiện mã QR kết nối nhanh',
+      title_share: 'Chia sẻ liên kết',
+      title_install_pwa: 'Cài đặt ứng dụng',
+      title_toggle_theme: 'Chuyển chế độ Sáng (Lightning) / Tối (Dark)',
+      title_transfers: 'Danh sách file đã truyền',
+      title_settings: 'Cài đặt Ngôn ngữ, Giao diện, Thư mục lưu & Mạng 4G',
+      hero_head_left: 'KẾT NỐI',
+      hero_head_right: 'TỨC THÌ',
+      hero_sub_pre: 'Quét QR hoặc nhập mã',
+      hero_sub_post: 'để truyền file & điều khiển PC.',
+      input_room_placeholder: 'Nhập mã thiết bị...',
+      btn_connect: 'Kết nối',
+      auto_reconnecting: 'Đang tự động kết nối lại...',
+      btn_cancel: 'Hủy',
+      recent_devices: 'Thiết bị gần đây',
+      auto_reconnect: 'Tự nối lại khi rớt mạng',
+      btn_clear: 'Xóa',
+      tap_to_send: 'Chạm để gửi',
+      host_remote_active: 'Đang cấp quyền điều khiển PC',
+      btn_revoke: 'Thu hồi',
+      host_gpu_req_pre: 'Điện thoại yêu cầu bật',
+      btn_enable_now: 'Bật ngay',
+      btn_close: 'Đóng',
+      btn_send_files: 'Gửi File / Ảnh',
+      btn_send_text: 'Gửi Text / Link',
+      btn_remote_pc: 'Điều khiển PC',
+      btn_screen_share: 'Chia sẻ màn hình',
+      btn_disconnect: 'Ngắt',
+      drawer_title: 'Truyền tải P2P',
+      drawer_auto_download: 'Tự tải về',
+      drawer_open_folder: 'Mở thư mục',
+      drawer_clear_history: 'Xóa lịch sử',
+      drawer_empty: 'Chưa có phiên truyền file nào. Chạm vào thiết bị trên Radar để gửi file.',
+      footer_your_device: 'Thiết bị của bạn:',
+      footer_settings_link: 'Cài đặt 4G & Bảo mật',
+      footer_e2ee_summary: 'Mã hóa đầu-cuối (DTLS / AES-256-GCM) • Tự động xuyên 4G/5G • Toàn vẹn SHA-256',
+      qr_title: 'Quét QR Kết Nối',
+      qr_your_room: 'Mã phòng của bạn',
+      qr_localhost_warn: 'Đang chạy tại localhost. Link & QR đã tự đổi sang địa chỉ mạng để điện thoại mở được (tránh lỗi Safari không kết nối được localhost).',
+      qr_share_url_label: 'Đường dẫn chia sẻ (Tránh lỗi localhost trên điện thoại)',
+      qr_share_url_placeholder: 'https://... hoặc http://192.168.1.x:8123',
+      qr_copy_btn: 'Copy Link Tự Động Kết Nối',
+      text_modal_title: 'Gửi Nhanh Văn Bản / Đường Link',
+      text_modal_placeholder: 'Dán đường link hoặc nội dung văn bản cần gửi...',
+      btn_send_now: 'Gửi ngay',
+      recv_text_title: 'Tin Nhắn / Link Nhận Được',
+      btn_copy_content: 'Sao chép nội dung',
+      settings_title: 'Cài Đặt & Mạng WebRTC (STUN / TURN 4G)',
+      settings_subtitle: 'Đảm bảo gửi file thành công 100% qua mạng di động 4G/5G',
+      settings_lang_title: 'Ngôn ngữ',
+      settings_lang_desc: 'Chuyển đổi ngôn ngữ hiển thị phần mềm',
+      settings_theme_title: 'Giao diện hiển thị',
+      settings_theme_desc: 'Chuyển đổi nhanh giữa Dark và Lightning sáng',
+      settings_savedir_title: 'Thư mục lưu file nhận được',
+      btn_default: 'Mặc định',
+      settings_savedir_placeholder: 'Thư mục Downloads mặc định',
+      btn_choose: 'Chọn...',
+      settings_stun_title: 'STUN Server mặc định (Luôn bật):',
+      settings_turn_enable: 'Kích hoạt TURN Server (Open Relay / Metered / Cloudflare)',
+      settings_turn_desc: 'Dùng khi 2 máy khác Wi-Fi hoặc dùng mạng 4G/5G Symmetric NAT',
+      settings_json_summary: 'Dán nhanh mảng JSON iceServers từ Metered Dashboard',
+      settings_json_btn: 'Trích xuất từ JSON',
+      settings_pin_label: 'Mã PIN Bảo Mật tùy chọn (4–8 ký tự)',
+      settings_pin_placeholder: 'Để trống nếu chỉ dùng xác nhận Đồng ý',
+      settings_pin_desc: 'Nếu đặt mã PIN, thiết bị khác khi muốn kết nối phải nhập đúng mã PIN này trước khi bạn phê duyệt.',
+      btn_reset_default: 'Khôi phục mặc định',
+      btn_save_settings: 'Lưu cấu hình',
+      consent_title: 'Yêu Cầu Kết Nối P2P',
+      consent_wants_pair: 'muốn ghép nối truyền file trực tiếp với thiết bị này.',
+      consent_sas_title: 'Mã Xác Thực Bảo Mật (SAS)',
+      consent_sas_desc: 'Kiểm tra mã này khớp với màn hình thiết bị kia để chống nghe lén MITM.',
+      consent_pin_label: 'Xác nhận Mã PIN Bảo Mật của bạn (nếu cần):',
+      consent_pin_placeholder: 'Nhập mã PIN bảo mật...',
+      consent_trust: 'Tin cậy thiết bị này trong phiên này (Tự động nối lại khi rớt 4G)',
+      consent_rc_title: 'Quyền điều khiển máy tính (Tùy chọn)',
+      consent_allow_remote: 'Cho phép điều khiển chuột, bàn phím & âm lượng PC này',
+      consent_allow_screen: 'Tự động chia sẻ màn hình PC độ trễ thấp',
+      consent_reject: 'Từ chối',
+      consent_accept: 'Đồng ý kết nối',
+      pin_title: 'Yêu Cầu Mã PIN Bảo Mật',
+      pin_desc: 'Thiết bị kia đang bật khóa PIN. Hãy nhập mã PIN để gửi yêu cầu kết nối:',
+      pin_placeholder: 'Nhập mã PIN (4-8 ký tự)',
+      pin_submit: 'Xác nhận & Gửi yêu cầu',
+      rc_title_touch: 'Chuyển chế độ chạm trực tiếp hoặc rê chuột tương đối',
+      rc_title_quality: 'Đổi độ phân giải & tần số quét (60Hz)',
+      rc_title_fs: 'Chế độ toàn màn hình cảm ứng',
+      rc_hide_keys: 'Ẩn phím',
+      rc_title_hide_keys: 'Ẩn/hiện thanh phím & chuột',
+      rc_hint_1: 'Vuốt để di chuột • Bật màn hình PC để chạm, vuốt & phóng to 60Hz',
+      rc_hint_2: '1 ngón: Di chuột / Chạm • 2 ngón: Phóng to / Cuộn / Chuột phải',
+      rc_view_screen: 'Xem màn hình PC (60Hz Siêu mượt)',
+      rc_stop: 'Tắt',
+      rc_exit_fs: '✕ Thoát toàn màn hình',
+      rc_left_click: 'Chuột trái',
+      rc_right_click: 'Chuột phải',
+      rc_type_placeholder: 'Gõ chữ tiếng Việt gửi thẳng sang PC...',
+      rc_type_btn: 'Gõ phím',
+      toast_lang_changed: 'Đã chuyển ngôn ngữ sang Tiếng Việt',
+      toast_theme_light: 'Đã bật chế độ Sáng (Lightning)',
+      toast_theme_dark: 'Đã bật chế độ Tối (Dark)',
+      save_dir_hint_pc: 'Nhập đường dẫn hoặc bấm "Chọn..." để đổi thư mục lưu tự động trên PC.',
+      save_dir_hint_web_chosen: 'File nhận trên trình duyệt sẽ ghi trực tiếp vào thư mục này (khi trình duyệt cho phép).',
+      save_dir_hint_web_pick: 'Bấm "Chọn..." để chọn thư mục lưu thẳng trên máy (Chrome/Edge), hoặc dùng Downloads mặc định.',
+      save_dir_hint_web_auto: 'Trình duyệt hiện tại tự động lưu vào thư mục Downloads mặc định.',
+      save_dir_selected_prefix: '[Thư mục đã chọn]',
+      status_opening: 'Đang mở...',
+      status_waiting: 'Đang chờ kết nối',
+      status_connecting: 'Đang kết nối...',
+      status_connected: 'Đã kết nối P2P',
+      status_connected_relay: 'Đã kết nối E2EE Relay (4G)',
+      status_disconnected: 'Mất kết nối',
+      status_signaling_lost: 'Mất kết nối Signaling'
+    },
+    en: {
+      page_title: 'SyloBeam — High-Speed P2P File Transfer & 60Hz Remote Control',
+      header_code: 'Code',
+      header_download_app: 'Get App',
+      header_copy_link: 'Copy Link',
+      header_show_qr: 'Show QR',
+      header_share: 'Share',
+      header_install_pwa: 'Install App',
+      title_copy_id: 'Copy device code',
+      title_regen_id: 'Generate new room code',
+      title_download_app: 'Download SyloBeam Windows Installer (.EXE)',
+      title_copy_link: 'Copy instant pairing link',
+      title_show_qr: 'Show quick pairing QR code',
+      title_share: 'Share pairing link',
+      title_install_pwa: 'Install web app',
+      title_toggle_theme: 'Switch Lightning (Light) / Dark theme',
+      title_transfers: 'File transfer history',
+      title_settings: 'Language, Theme, Save Folder & 4G Network Settings',
+      hero_head_left: 'INSTANT',
+      hero_head_right: 'CONNECT',
+      hero_sub_pre: 'Scan QR or enter code',
+      hero_sub_post: 'to transfer files & control PC.',
+      input_room_placeholder: 'Enter device code...',
+      btn_connect: 'Connect',
+      auto_reconnecting: 'Reconnecting automatically...',
+      btn_cancel: 'Cancel',
+      recent_devices: 'Recent devices',
+      auto_reconnect: 'Auto-reconnect on drop',
+      btn_clear: 'Clear',
+      tap_to_send: 'Tap to send',
+      host_remote_active: 'PC remote control active',
+      btn_revoke: 'Revoke',
+      host_gpu_req_pre: 'Phone requests enabling',
+      btn_enable_now: 'Enable now',
+      btn_close: 'Close',
+      btn_send_files: 'Send Files / Photos',
+      btn_send_text: 'Send Text / Link',
+      btn_remote_pc: 'Control PC',
+      btn_screen_share: 'Share Screen',
+      btn_disconnect: 'Disconnect',
+      drawer_title: 'P2P Transfers',
+      drawer_auto_download: 'Auto download',
+      drawer_open_folder: 'Open folder',
+      drawer_clear_history: 'Clear history',
+      drawer_empty: 'No file transfers yet. Tap a connected device on Radar to send files.',
+      footer_your_device: 'Your device:',
+      footer_settings_link: '4G & Security Settings',
+      footer_e2ee_summary: 'End-to-End Encrypted (DTLS / AES-256-GCM) • Auto 4G/5G Relay • SHA-256 Verified',
+      qr_title: 'Scan QR to Connect',
+      qr_your_room: 'Your device code',
+      qr_localhost_warn: 'Running on localhost. Link & QR automatically switched to your LAN IP so mobile browsers can connect.',
+      qr_share_url_label: 'Share base URL (Avoids localhost issues on mobile)',
+      qr_share_url_placeholder: 'https://... or http://192.168.1.x:8123',
+      qr_copy_btn: 'Copy Instant Pairing Link',
+      text_modal_title: 'Quick Send Text / URL',
+      text_modal_placeholder: 'Paste a URL or text message to send...',
+      btn_send_now: 'Send now',
+      recv_text_title: 'Received Message / Link',
+      btn_copy_content: 'Copy text',
+      settings_title: 'Settings & WebRTC Network (STUN / TURN 4G)',
+      settings_subtitle: 'Ensure 100% transfer & remote reliability over 4G/5G mobile networks',
+      settings_lang_title: 'Language',
+      settings_lang_desc: 'Switch application display language',
+      settings_theme_title: 'Appearance',
+      settings_theme_desc: 'Quickly switch between Dark and Lightning Light mode',
+      settings_savedir_title: 'Download Save Folder',
+      btn_default: 'Default',
+      settings_savedir_placeholder: 'Default Downloads folder',
+      btn_choose: 'Browse...',
+      settings_stun_title: 'Default STUN Servers (Always enabled):',
+      settings_turn_enable: 'Enable TURN Server (Open Relay / Metered / Cloudflare)',
+      settings_turn_desc: 'Used when devices are on strict 4G/5G Symmetric NAT networks',
+      settings_json_summary: 'Quick paste iceServers JSON array from Metered Dashboard',
+      settings_json_btn: 'Extract from JSON',
+      settings_pin_label: 'Optional Security PIN (4–8 chars)',
+      settings_pin_placeholder: 'Leave blank to use Approve button only',
+      settings_pin_desc: 'When set, incoming peers must enter this PIN before your approval prompt.',
+      btn_reset_default: 'Reset defaults',
+      btn_save_settings: 'Save settings',
+      consent_title: 'P2P Connection Request',
+      consent_wants_pair: 'wants to pair directly for file transfer.',
+      consent_sas_title: 'Security Verification Code (SAS)',
+      consent_sas_desc: 'Verify this code matches the other screen to prevent MITM eavesdropping.',
+      consent_pin_label: 'Confirm your Security PIN (if required):',
+      consent_pin_placeholder: 'Enter security PIN...',
+      consent_trust: 'Trust this device for this session (Auto-reconnect on 4G drop)',
+      consent_rc_title: 'PC Remote Control Permission (Optional)',
+      consent_allow_remote: 'Allow controlling mouse, keyboard & system volume on this PC',
+      consent_allow_screen: 'Auto-start low-latency PC screen streaming',
+      consent_reject: 'Decline',
+      consent_accept: 'Approve connection',
+      pin_title: 'Security PIN Required',
+      pin_desc: 'The remote device has PIN lock enabled. Enter its PIN to send a pairing request:',
+      pin_placeholder: 'Enter PIN (4-8 chars)',
+      pin_submit: 'Verify & Send Request',
+      rc_title_touch: 'Switch between direct touch and relative trackpad mode',
+      rc_title_quality: 'Change resolution & refresh rate (60Hz)',
+      rc_title_fs: 'Fullscreen touch remote mode',
+      rc_hide_keys: 'Hide keys',
+      rc_title_hide_keys: 'Show/hide keyboard & mouse bar',
+      rc_hint_1: 'Swipe to move cursor • Enable PC screen for 60Hz touch, swipe & zoom',
+      rc_hint_2: '1 finger: Move / Tap • 2 fingers: Pinch Zoom / Scroll / Right Click',
+      rc_view_screen: 'View PC Screen (Smooth 60Hz)',
+      rc_stop: 'Stop',
+      rc_exit_fs: '✕ Exit Fullscreen',
+      rc_left_click: 'Left Click',
+      rc_right_click: 'Right Click',
+      rc_type_placeholder: 'Type text directly to PC...',
+      rc_type_btn: 'Send Text',
+      toast_lang_changed: 'Language switched to English',
+      toast_theme_light: 'Lightning Light mode enabled',
+      toast_theme_dark: 'Dark mode enabled',
+      save_dir_hint_pc: 'Enter a path or click "Browse..." to change the automatic PC save folder.',
+      save_dir_hint_web_chosen: 'Received browser files will be saved directly to this folder (when permitted).',
+      save_dir_hint_web_pick: 'Click "Browse..." to pick a local save folder (Chrome/Edge), or use default Downloads.',
+      save_dir_hint_web_auto: 'Current browser automatically saves to the default Downloads folder.',
+      save_dir_selected_prefix: '[Selected folder]',
+      status_opening: 'Starting...',
+      status_waiting: 'Waiting for peer',
+      status_connecting: 'Connecting...',
+      status_connected: 'P2P Connected',
+      status_connected_relay: 'E2EE Relay Connected (4G)',
+      status_disconnected: 'Disconnected',
+      status_signaling_lost: 'Signaling Disconnected'
+    }
+  };
 
   const DEFAULT_STUN_SERVERS = [
     { urls: 'stun:stun.l.google.com:19302' },
@@ -238,6 +492,7 @@
     incomingTransfers: new Map(),
     transferRecords: new Map(),
     theme: 'dark',
+    lang: 'vi',
     desktopSaveDir: '',
     desktopDefaultSaveDir: '',
     webSaveDirHandle: null,
@@ -349,6 +604,8 @@
     turnSettingsForm: document.getElementById('turn-settings-form'),
     btnThemeDark: document.getElementById('btn-theme-dark'),
     btnThemeLight: document.getElementById('btn-theme-light'),
+    btnLangVi: document.getElementById('btn-lang-vi'),
+    btnLangEn: document.getElementById('btn-lang-en'),
     saveDirSection: document.getElementById('save-dir-section'),
     saveDirInput: document.getElementById('save-dir-input'),
     btnChooseSaveDir: document.getElementById('btn-choose-save-dir'),
@@ -1133,6 +1390,90 @@
   // ============================================================================
   // 7. CONNECTION STATUS & QR CODE UI
   // ============================================================================
+  function t(key) {
+    const lang = state.lang === 'en' ? 'en' : 'vi';
+    return (I18N[lang] && I18N[lang][key]) || I18N.vi[key] || key;
+  }
+
+  function translateStatusText(raw) {
+    if (!raw) return raw;
+    if (state.lang !== 'en') return raw;
+    const exact = {
+      'Đang mở...': I18N.en.status_opening,
+      'Đang chờ kết nối': I18N.en.status_waiting,
+      'Đang kết nối...': I18N.en.status_connecting,
+      'Đã kết nối P2P': I18N.en.status_connected,
+      'Đã kết nối E2EE Relay (4G)': I18N.en.status_connected_relay,
+      'Mất kết nối': I18N.en.status_disconnected,
+      'Mất kết nối Signaling': I18N.en.status_signaling_lost,
+      'Đang tự động kết nối lại...': I18N.en.auto_reconnecting
+    };
+    if (exact[raw]) return exact[raw];
+    if (raw.startsWith('Đang kết nối ')) return 'Connecting ' + raw.slice(13);
+    if (raw.startsWith('Yêu cầu từ ')) return 'Request from ' + raw.slice(11);
+    if (raw.startsWith('Đang kết nối Relay 4G')) return 'Connecting 4G Relay...';
+    return raw;
+  }
+
+  function loadSavedLanguage() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY_LANG);
+      return saved === 'en' ? 'en' : 'vi';
+    } catch {
+      return 'vi';
+    }
+  }
+
+  function applyLanguage(lang, { persist = true } = {}) {
+    const nextLang = lang === 'en' ? 'en' : 'vi';
+    state.lang = nextLang;
+    document.documentElement.lang = nextLang;
+    document.title = t('page_title');
+
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      const key = el.getAttribute('data-i18n');
+      if (key) el.textContent = t(key);
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (key) el.setAttribute('placeholder', t(key));
+    });
+    document.querySelectorAll('[data-i18n-title]').forEach((el) => {
+      const key = el.getAttribute('data-i18n-title');
+      if (key) el.setAttribute('title', t(key));
+    });
+
+    if (dom.btnLangVi) dom.btnLangVi.classList.toggle('is-active', nextLang === 'vi');
+    if (dom.btnLangEn) dom.btnLangEn.classList.toggle('is-active', nextLang === 'en');
+
+    if (persist) {
+      try {
+        localStorage.setItem(STORAGE_KEY_LANG, nextLang);
+      } catch {}
+    }
+
+    if (dom.statusText && dom.statusText.textContent) {
+      const cur = dom.statusText.textContent.trim();
+      const reverseVi = {
+        [I18N.en.status_opening]: I18N.vi.status_opening,
+        [I18N.en.status_waiting]: I18N.vi.status_waiting,
+        [I18N.en.status_connecting]: I18N.vi.status_connecting,
+        [I18N.en.status_connected]: I18N.vi.status_connected,
+        [I18N.en.status_connected_relay]: I18N.vi.status_connected_relay,
+        [I18N.en.status_disconnected]: I18N.vi.status_disconnected,
+        [I18N.en.status_signaling_lost]: I18N.vi.status_signaling_lost
+      };
+      if (nextLang === 'en') {
+        dom.statusText.textContent = translateStatusText(cur);
+      } else if (reverseVi[cur]) {
+        dom.statusText.textContent = reverseVi[cur];
+      }
+    }
+
+    if (typeof updateDownloadAllButtonUI === 'function') updateDownloadAllButtonUI();
+    if (typeof syncSaveDirModalUI === 'function') syncSaveDirModalUI();
+  }
+
   function setConnectionStatus(status, customLabel = '') {
     const styles = {
       waiting: {
@@ -1160,7 +1501,7 @@
     const current = styles[status] || styles.waiting;
     dom.statusPill.className = `inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium border whitespace-nowrap shrink-0 transition-all ${current.pill}`;
     dom.statusDot.className = `w-1.5 h-1.5 rounded-full shrink-0 ${current.dot}`;
-    dom.statusText.textContent = current.text;
+    dom.statusText.textContent = translateStatusText(current.text);
   }
 
   function renderRoomIdAndQR(roomId) {
@@ -5394,15 +5735,17 @@
       dom.btnDownloadAll.classList.remove('hidden');
       const allImages = received.every((r) => r.isImage);
       if (IS_DESKTOP_APP) {
-        dom.btnDownloadAll.textContent = `Lưu tất cả (${received.length})`;
+        dom.btnDownloadAll.textContent = state.lang === 'en' ? `Save all (${received.length})` : `Lưu tất cả (${received.length})`;
       } else if (isMobileDevice() && allImages && typeof navigator.canShare === 'function') {
-        dom.btnDownloadAll.textContent = `Lưu ${received.length} ảnh`;
+        dom.btnDownloadAll.textContent = state.lang === 'en' ? `Save ${received.length} photos` : `Lưu ${received.length} ảnh`;
       } else {
-        dom.btnDownloadAll.textContent = `Tải tất cả (${received.length} • ZIP)`;
+        dom.btnDownloadAll.textContent = state.lang === 'en' ? `Download all (${received.length} • ZIP)` : `Tải tất cả (${received.length} • ZIP)`;
       }
     } else if (received.length === 1 && isMobileDevice()) {
       dom.btnDownloadAll.classList.remove('hidden');
-      dom.btnDownloadAll.textContent = received[0].isImage ? 'Lưu ảnh' : 'Tải file';
+      dom.btnDownloadAll.textContent = state.lang === 'en'
+        ? (received[0].isImage ? 'Save photo' : 'Download file')
+        : (received[0].isImage ? 'Lưu ảnh' : 'Tải file');
     } else {
       dom.btnDownloadAll.classList.add('hidden');
     }
@@ -5923,7 +6266,7 @@
         }
       } catch {}
       if (dom.saveDirHint) {
-        dom.saveDirHint.textContent = 'Nhập đường dẫn hoặc bấm "Chọn..." để đổi thư mục lưu tự động trên PC.';
+        dom.saveDirHint.textContent = t('save_dir_hint_pc');
       }
       return;
     }
@@ -5935,17 +6278,17 @@
       dom.btnChooseSaveDir.classList.toggle('opacity-40', !canPickWebDir);
     }
     if (state.webSaveDirHandle) {
-      dom.saveDirInput.value = `[Thư mục đã chọn] ${state.webSaveDirHandle.name}`;
+      dom.saveDirInput.value = `${t('save_dir_selected_prefix')} ${state.webSaveDirHandle.name}`;
       if (dom.saveDirHint) {
-        dom.saveDirHint.textContent = 'File nhận trên trình duyệt sẽ ghi trực tiếp vào thư mục này (khi trình duyệt cho phép).';
+        dom.saveDirHint.textContent = t('save_dir_hint_web_chosen');
       }
     } else {
       dom.saveDirInput.value = '';
-      dom.saveDirInput.placeholder = 'Mặc định theo trình duyệt (Downloads)';
+      dom.saveDirInput.placeholder = t('settings_savedir_placeholder');
       if (dom.saveDirHint) {
         dom.saveDirHint.textContent = canPickWebDir
-          ? 'Bấm "Chọn..." để chọn thư mục lưu thẳng trên máy (Chrome/Edge), hoặc dùng Downloads mặc định.'
-          : 'Trình duyệt hiện tại tự động lưu vào thư mục Downloads mặc định.';
+          ? t('save_dir_hint_web_pick')
+          : t('save_dir_hint_web_auto');
       }
     }
   }
@@ -6241,10 +6584,10 @@
       img.src = src;
     };
 
-    loadTex('earth', 0, texEarth, './assets/earth-blue-marble.jpg?v=20');
-    loadTex('clouds', 1, texClouds, './assets/earth-clouds.jpg?v=20');
-    loadTex('bump', 2, texBump, './assets/earth-topology.jpg?v=20');
-    loadTex('night', 3, texNight, './assets/earth-night.jpg?v=20');
+    loadTex('earth', 0, texEarth, './assets/earth-blue-marble.jpg?v=21');
+    loadTex('clouds', 1, texClouds, './assets/earth-clouds.jpg?v=21');
+    loadTex('bump', 2, texBump, './assets/earth-topology.jpg?v=21');
+    loadTex('night', 3, texNight, './assets/earth-night.jpg?v=21');
 
     earthEngine.mode = 'webgl';
     earthEngine.gl = gl;
@@ -6510,6 +6853,8 @@
     }
     if (dom.btnThemeDark) dom.btnThemeDark.classList.toggle('is-active', state.theme === 'dark');
     if (dom.btnThemeLight) dom.btnThemeLight.classList.toggle('is-active', state.theme === 'light');
+    if (dom.btnLangVi) dom.btnLangVi.classList.toggle('is-active', state.lang !== 'en');
+    if (dom.btnLangEn) dom.btnLangEn.classList.toggle('is-active', state.lang === 'en');
     syncSaveDirModalUI();
     dom.settingsModal.classList.remove('hidden');
     dom.settingsModal.classList.add('flex');
@@ -6863,7 +7208,7 @@
       dom.btnToggleTheme.addEventListener('click', () => {
         const next = state.theme === 'light' ? 'dark' : 'light';
         applyTheme(next);
-        showToast(next === 'light' ? 'Đã bật chế độ Sáng (Lightning)' : 'Đã bật chế độ Tối (Dark)', 'info');
+        showToast(next === 'light' ? t('toast_theme_light') : t('toast_theme_dark'), 'info');
       });
     }
     if (dom.btnThemeDark) {
@@ -6871,6 +7216,18 @@
     }
     if (dom.btnThemeLight) {
       dom.btnThemeLight.addEventListener('click', () => applyTheme('light'));
+    }
+    if (dom.btnLangVi) {
+      dom.btnLangVi.addEventListener('click', () => {
+        applyLanguage('vi');
+        showToast(t('toast_lang_changed'), 'info');
+      });
+    }
+    if (dom.btnLangEn) {
+      dom.btnLangEn.addEventListener('click', () => {
+        applyLanguage('en');
+        showToast(t('toast_lang_changed'), 'info');
+      });
     }
 
     // Custom Save Folder Controls inside Settings Modal
@@ -7144,6 +7501,7 @@
 
   function bootstrap() {
     applyTheme(loadSavedTheme(), { persist: false, redrawEarth: false });
+    applyLanguage(loadSavedLanguage(), { persist: false });
     initRealtimeEarth();
     loadWebSaveDirHandle();
     state.myProfile = detectDeviceProfile();

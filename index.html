@@ -19,15 +19,15 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="SyloBeam" />
   <link rel="manifest" href="./manifest.json" />
-  <link rel="icon" type="image/svg+xml" href="./assets/logo.svg?v=20" />
+  <link rel="icon" type="image/svg+xml" href="./assets/logo.svg?v=21" />
 
   <!-- Pre-compiled Self-Hosted Stylesheet (Zero external CDN blocking on 4G/5G) -->
-  <link rel="stylesheet" href="./styles.css?v=20" />
+  <link rel="stylesheet" href="./styles.css?v=21" />
 
   <!-- Self-Hosted WebRTC & QR Libraries (Zero unpkg/CDN timeout on 4G/5G) -->
   <script defer src="./vendor/peerjs.min.js"></script>
   <script defer src="./vendor/qrcode.min.js"></script>
-  <script defer src="./app.js?v=20"></script>
+  <script defer src="./app.js?v=21"></script>
 </head>
 <body class="min-h-screen flex flex-col justify-between select-none font-sans antialiased">
 
@@ -48,7 +48,7 @@
     <!-- Left: Minimalist Monogram Logo + Studio Wordmark + Live Status -->
     <div class="flex items-center gap-2.5 min-w-0 order-1">
       <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-zinc-950/90 border border-white/10 flex items-center justify-center shrink-0 overflow-hidden shadow-lg">
-        <img src="./assets/logo.svg?v=20" alt="SyloBeam Logo" class="w-full h-full object-cover" />
+        <img src="./assets/logo.svg?v=21" alt="SyloBeam Logo" class="w-full h-full object-cover" />
       </div>
       <div class="min-w-0">
         <div class="flex items-center gap-1.5 sm:gap-2 flex-nowrap">
@@ -66,14 +66,14 @@
     <!-- Center: Minimalist Room Code Pill (Row 2 centered on mobile, Center on desktop) -->
     <div class="order-3 w-full sm:order-2 sm:w-auto flex justify-center">
       <div class="inline-flex items-center gap-1.5 min-surface rounded-full pl-3.5 pr-1.5 py-1">
-        <span class="text-[11px] uppercase tracking-wider text-zinc-500 font-medium">Mã</span>
+        <span data-i18n="header_code" class="text-[11px] uppercase tracking-wider text-zinc-500 font-medium">Mã</span>
         <span id="my-room-id" class="font-mono text-xs sm:text-sm font-semibold tracking-[0.18em] text-white select-all px-1">------</span>
-        <button id="btn-copy-id" type="button" title="Sao chép mã phòng" class="p-1.5 rounded-full hover:bg-zinc-800 text-zinc-400 hover:text-white transition">
+        <button id="btn-copy-id" type="button" data-i18n-title="title_copy_id" title="Sao chép mã phòng" class="p-1.5 rounded-full hover:bg-zinc-800 text-zinc-400 hover:text-white transition">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
           </svg>
         </button>
-        <button id="btn-regenerate-id" type="button" title="Đổi mã phòng mới" class="p-1.5 rounded-full hover:bg-zinc-800 text-zinc-400 hover:text-white transition">
+        <button id="btn-regenerate-id" type="button" data-i18n-title="title_regen_id" title="Đổi mã phòng mới" class="p-1.5 rounded-full hover:bg-zinc-800 text-zinc-400 hover:text-white transition">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
           </svg>
@@ -84,50 +84,50 @@
     <!-- Right: Unified Top-Right Studio Actions (Tải App • Copy Link • Hiện QR • Cài App • Theme • Transfers • Settings) -->
     <div class="flex flex-wrap items-center justify-end gap-1.5 sm:gap-2 order-2 sm:order-3 shrink-0">
       <!-- Download Windows App Installer -->
-      <a id="btn-download-windows-app" href="./SyloBeam-Setup.exe" download="SyloBeam-Setup.exe" title="Tải bộ cài đặt SyloBeam cho Windows (.EXE)" class="min-button h-8 sm:h-9 px-2.5 sm:px-3 rounded-full text-xs font-semibold text-white hover:text-white flex items-center gap-1.5 shrink-0">
+      <a id="btn-download-windows-app" href="./SyloBeam-Setup.exe" download="SyloBeam-Setup.exe" data-i18n-title="title_download_app" title="Tải bộ cài đặt SyloBeam cho Windows (.EXE)" class="min-button h-8 sm:h-9 px-2.5 sm:px-3 rounded-full text-xs font-semibold text-white hover:text-white flex items-center gap-1.5 shrink-0">
         <svg class="w-3.5 h-3.5 clevante-accent-text shrink-0" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v1a2 2 0 002 2h12a2 2 0 002-2v-1" />
         </svg>
-        <span>Tải App</span>
+        <span data-i18n="header_download_app">Tải App</span>
       </a>
 
       <!-- Copy Quick Connect Link -->
-      <button id="btn-copy-link" type="button" title="Sao chép đường dẫn kết nối nhanh" class="min-button h-8 sm:h-9 px-2.5 sm:px-3 rounded-full text-xs font-semibold text-white hover:text-white flex items-center gap-1.5 shrink-0">
+      <button id="btn-copy-link" type="button" data-i18n-title="title_copy_link" title="Sao chép đường dẫn kết nối nhanh" class="min-button h-8 sm:h-9 px-2.5 sm:px-3 rounded-full text-xs font-semibold text-white hover:text-white flex items-center gap-1.5 shrink-0">
         <svg class="w-3.5 h-3.5 clevante-accent-text shrink-0" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10 14a4 4 0 005.66 0l3.54-3.54a4 4 0 00-5.66-5.66l-1.5 1.5M14 10a4 4 0 00-5.66 0l-3.54 3.54a4 4 0 005.66 5.66l1.5-1.5" />
         </svg>
-        <span>Copy Link</span>
+        <span data-i18n="header_copy_link">Copy Link</span>
       </button>
 
       <!-- Open QR Code Modal -->
-      <button id="btn-open-qr-modal" type="button" title="Hiện mã QR kết nối nhanh" class="min-button h-8 sm:h-9 px-2.5 sm:px-3 rounded-full text-xs font-semibold text-white hover:text-white flex items-center gap-1.5 shrink-0">
+      <button id="btn-open-qr-modal" type="button" data-i18n-title="title_show_qr" title="Hiện mã QR kết nối nhanh" class="min-button h-8 sm:h-9 px-2.5 sm:px-3 rounded-full text-xs font-semibold text-white hover:text-white flex items-center gap-1.5 shrink-0">
         <svg class="w-3.5 h-3.5 clevante-accent-text shrink-0" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
           <rect x="4" y="4" width="6" height="6" rx="1.2" />
           <rect x="14" y="4" width="6" height="6" rx="1.2" />
           <rect x="4" y="14" width="6" height="6" rx="1.2" />
           <path stroke-linecap="round" stroke-linejoin="round" d="M14 14h2v2h-2v-2zm4 0h2v4h-2v-4zm-4 4h2v2h-2v-2zm4 2h2" />
         </svg>
-        <span>Hiện QR</span>
+        <span data-i18n="header_show_qr">Hiện QR</span>
       </button>
 
       <!-- Native Mobile Share -->
-      <button id="btn-native-share" type="button" title="Chia sẻ liên kết" class="hidden min-button h-8 sm:h-9 px-2.5 sm:px-3 rounded-full text-xs font-semibold text-white hover:text-white items-center gap-1.5 shrink-0">
+      <button id="btn-native-share" type="button" data-i18n-title="title_share" title="Chia sẻ liên kết" class="hidden min-button h-8 sm:h-9 px-2.5 sm:px-3 rounded-full text-xs font-semibold text-white hover:text-white items-center gap-1.5 shrink-0">
         <svg class="w-3.5 h-3.5 clevante-accent-text shrink-0" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7M16 6l-4-4-4 4m4-4v13" />
         </svg>
-        <span>Chia sẻ</span>
+        <span data-i18n="header_share">Chia sẻ</span>
       </button>
 
       <!-- Install PWA Button (Web Browser Only — hidden inside Desktop App) -->
-      <button id="btn-install-pwa" type="button" title="Cài đặt ứng dụng" class="hidden min-button h-8 sm:h-9 px-2.5 sm:px-3 rounded-full text-xs font-semibold text-white items-center gap-1.5 shrink-0">
+      <button id="btn-install-pwa" type="button" data-i18n-title="title_install_pwa" title="Cài đặt ứng dụng" class="hidden min-button h-8 sm:h-9 px-2.5 sm:px-3 rounded-full text-xs font-semibold text-white items-center gap-1.5 shrink-0">
         <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v1a2 2 0 002 2h12a2 2 0 002-2v-1" />
         </svg>
-        <span class="hidden md:inline">Cài App</span>
+        <span data-i18n="header_install_pwa" class="hidden md:inline">Cài App</span>
       </button>
 
       <!-- Lightning / Dark Theme Toggle -->
-      <button id="btn-toggle-theme" type="button" title="Chuyển chế độ Sáng (Lightning) / Tối (Dark)" class="min-button w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-zinc-300 hover:text-white shrink-0">
+      <button id="btn-toggle-theme" type="button" data-i18n-title="title_toggle_theme" title="Chuyển chế độ Sáng (Lightning) / Tối (Dark)" class="min-button w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-zinc-300 hover:text-white shrink-0">
         <svg id="icon-theme-sun" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
           <circle cx="12" cy="12" r="4" />
           <path stroke-linecap="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41" />
@@ -138,7 +138,7 @@
       </button>
 
       <!-- Toggle Transfers Drawer Button -->
-      <button id="btn-toggle-transfers" type="button" title="Danh sách file đã truyền" class="relative min-button w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-zinc-300 hover:text-white shrink-0">
+      <button id="btn-toggle-transfers" type="button" data-i18n-title="title_transfers" title="Danh sách file đã truyền" class="relative min-button w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-zinc-300 hover:text-white shrink-0">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
         </svg>
@@ -146,7 +146,7 @@
       </button>
 
       <!-- Settings & Storage Folder Button -->
-      <button id="btn-open-settings" type="button" title="Cài đặt Giao diện, Thư mục lưu & Mạng 4G" class="relative min-button w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-zinc-300 hover:text-white shrink-0">
+      <button id="btn-open-settings" type="button" data-i18n-title="title_settings" title="Cài đặt Ngôn ngữ, Giao diện, Thư mục lưu & Mạng 4G" class="relative min-button w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-zinc-300 hover:text-white shrink-0">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
           <circle cx="8" cy="6" r="1.8" fill="currentColor" />
@@ -186,17 +186,17 @@
         <!-- Minimalist P2P Core Brand Node -->
         <div class="relative flex items-center justify-center">
           <div class="relative w-16 h-16 rounded-2xl bg-zinc-950/95 border border-white/15 flex items-center justify-center shadow-2xl overflow-hidden p-1">
-            <img src="./assets/logo.svg?v=20" alt="SyloBeam" class="w-full h-full object-contain" />
+            <img src="./assets/logo.svg?v=21" alt="SyloBeam" class="w-full h-full object-contain" />
           </div>
         </div>
 
         <div class="space-y-2 max-w-md flex flex-col items-center">
           <div class="clevante-eyebrow">P2P • 60HZ REMOTE</div>
           <h2 class="clevante-headline text-2xl sm:text-3xl pt-0.5">
-            KẾT NỐI <span class="clevante-slash" aria-hidden="true"></span> TỨC THÌ
+            <span data-i18n="hero_head_left">KẾT NỐI</span> <span class="clevante-slash" aria-hidden="true"></span> <span data-i18n="hero_head_right">TỨC THÌ</span>
           </h2>
           <p class="text-xs text-zinc-400 leading-relaxed max-w-sm font-light">
-            Quét QR hoặc nhập mã <span id="hint-room-code" class="font-mono text-white font-semibold">------</span> để truyền file &amp; điều khiển PC.
+            <span data-i18n="hero_sub_pre">Quét QR hoặc nhập mã</span> <span id="hint-room-code" class="font-mono text-white font-semibold">------</span> <span data-i18n="hero_sub_post">để truyền file &amp; điều khiển PC.</span>
           </p>
         </div>
 
@@ -231,6 +231,7 @@
             id="remote-room-input"
             type="text"
             maxlength="12"
+            data-i18n-placeholder="input_room_placeholder"
             placeholder="Nhập mã thiết bị..."
             autocomplete="off"
             autocapitalize="characters"
@@ -240,6 +241,7 @@
           <button
             id="btn-connect-peer"
             type="submit"
+            data-i18n="btn_connect"
             class="px-4 py-1.5 rounded-full bg-white hover:bg-zinc-200 disabled:opacity-40 text-zinc-950 font-semibold text-xs transition shrink-0"
           >
             Kết nối
@@ -250,9 +252,9 @@
         <div id="auto-reconnect-banner" class="hidden w-full max-w-sm rounded-2xl bg-amber-500/10 border border-amber-500/25 px-3.5 py-2.5 flex items-center justify-between gap-2 text-left">
           <div class="flex items-center gap-2 min-w-0">
             <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping shrink-0"></span>
-            <span id="auto-reconnect-text" class="text-[11px] text-amber-200 truncate">Đang tự động kết nối lại...</span>
+            <span id="auto-reconnect-text" data-i18n="auto_reconnecting" class="text-[11px] text-amber-200 truncate">Đang tự động kết nối lại...</span>
           </div>
-          <button id="btn-cancel-reconnect" type="button" class="px-2.5 py-1 rounded-full bg-zinc-900 hover:bg-zinc-800 text-[11px] text-zinc-200 border border-zinc-700 shrink-0 transition">
+          <button id="btn-cancel-reconnect" type="button" data-i18n="btn_cancel" class="px-2.5 py-1 rounded-full bg-zinc-900 hover:bg-zinc-800 text-[11px] text-zinc-200 border border-zinc-700 shrink-0 transition">
             Hủy
           </button>
         </div>
@@ -261,13 +263,13 @@
         <div id="recent-peers-box" class="hidden w-full max-w-md pt-2 space-y-2">
           <div class="flex items-center justify-between px-1 text-[11px] text-zinc-500">
             <div class="flex items-center gap-2">
-              <span>Thiết bị gần đây</span>
+              <span data-i18n="recent_devices">Thiết bị gần đây</span>
               <label class="inline-flex items-center gap-1 cursor-pointer text-zinc-400 hover:text-zinc-200">
                 <input id="toggle-auto-reconnect" type="checkbox" class="rounded bg-zinc-900 border-zinc-700 text-white focus:ring-0" checked />
-                <span>Tự nối lại khi rớt mạng</span>
+                <span data-i18n="auto_reconnect">Tự nối lại khi rớt mạng</span>
               </label>
             </div>
-            <button id="btn-clear-recent-peers" type="button" class="hover:text-zinc-300 transition">Xóa</button>
+            <button id="btn-clear-recent-peers" type="button" data-i18n="btn_clear" class="hover:text-zinc-300 transition">Xóa</button>
           </div>
           <div id="recent-peers-list" class="flex flex-wrap items-center justify-center gap-1.5"></div>
         </div>
@@ -316,7 +318,7 @@
               </svg>
             </div>
 
-            <span id="peer-ring-percent" class="text-[11px] font-mono text-zinc-400 group-hover:text-white transition">
+            <span id="peer-ring-percent" data-i18n="tap_to_send" class="text-[11px] font-mono text-zinc-400 group-hover:text-white transition">
               Chạm để gửi
             </span>
           </button>
@@ -355,9 +357,9 @@
         <div id="host-remote-banner" class="hidden w-full max-w-sm rounded-2xl bg-rose-500/10 border border-rose-500/30 px-3.5 py-2.5 flex items-center justify-between gap-2 text-left">
           <div class="flex items-center gap-2 min-w-0">
             <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping shrink-0"></span>
-            <span class="text-[11px] text-rose-200 leading-snug">Đang cấp quyền điều khiển PC <span class="font-mono text-rose-300">(Ctrl+Alt+Esc)</span></span>
+            <span class="text-[11px] text-rose-200 leading-snug"><span data-i18n="host_remote_active">Đang cấp quyền điều khiển PC</span> <span class="font-mono text-rose-300">(Ctrl+Alt+Esc)</span></span>
           </div>
-          <button id="btn-revoke-remote-control" type="button" class="px-2.5 py-1 rounded-full bg-rose-500 hover:bg-rose-400 text-white text-[11px] font-semibold shrink-0 transition">
+          <button id="btn-revoke-remote-control" type="button" data-i18n="btn_revoke" class="px-2.5 py-1 rounded-full bg-rose-500 hover:bg-rose-400 text-white text-[11px] font-semibold shrink-0 transition">
             Thu hồi
           </button>
         </div>
@@ -366,16 +368,16 @@
         <div id="host-gpu-request-banner" class="hidden w-full max-w-sm rounded-2xl bg-emerald-500/10 border border-emerald-500/35 px-3.5 py-2.5 flex items-center justify-between gap-2 text-left shadow-lg">
           <div class="flex items-center gap-2 min-w-0">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping shrink-0"></span>
-            <span class="text-[11px] text-emerald-300 leading-snug">Điện thoại yêu cầu bật <strong class="text-white">60Hz GPU H.264</strong></span>
+            <span class="text-[11px] text-emerald-300 leading-snug"><span data-i18n="host_gpu_req_pre">Điện thoại yêu cầu bật</span> <strong class="text-white">60Hz GPU H.264</strong></span>
           </div>
           <div class="flex items-center gap-1.5 shrink-0">
             <button id="btn-accept-gpu-60hz" type="button" class="px-3 py-1 rounded-full bg-emerald-500 text-zinc-950 text-[11px] font-bold transition shadow-lg inline-flex items-center gap-1">
               <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" />
               </svg>
-              <span>Bật ngay</span>
+              <span data-i18n="btn_enable_now">Bật ngay</span>
             </button>
-            <button id="btn-dismiss-gpu-60hz" type="button" title="Đóng" class="px-2 py-1 rounded-full text-zinc-400 hover:text-white text-[11px] transition">
+            <button id="btn-dismiss-gpu-60hz" type="button" data-i18n-title="btn_close" title="Đóng" class="px-2 py-1 rounded-full text-zinc-400 hover:text-white text-[11px] transition">
               ✕
             </button>
           </div>
@@ -387,14 +389,14 @@
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
             </svg>
-            <span>Gửi File / Ảnh</span>
+            <span data-i18n="btn_send_files">Gửi File / Ảnh</span>
           </button>
 
           <button id="btn-open-text-modal" type="button" class="min-button px-4 py-2 rounded-full text-xs font-medium text-zinc-200 hover:text-white flex items-center gap-1.5">
             <svg class="w-3.5 h-3.5 text-zinc-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
             </svg>
-            <span>Gửi Text / Link</span>
+            <span data-i18n="btn_send_text">Gửi Text / Link</span>
           </button>
 
           <!-- Phone Client: Open Remote Control Interface (Visible when Desktop Host grants permission) -->
@@ -402,7 +404,7 @@
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
             </svg>
-            <span>Điều khiển PC</span>
+            <span data-i18n="btn_remote_pc">Điều khiển PC</span>
           </button>
 
           <!-- Desktop Host: Toggle Live Screen Share -->
@@ -410,10 +412,10 @@
             <svg class="w-3.5 h-3.5 text-zinc-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
-            <span id="btn-screen-share-label">Chia sẻ màn hình</span>
+            <span id="btn-screen-share-label" data-i18n="btn_screen_share">Chia sẻ màn hình</span>
           </button>
 
-          <button id="btn-disconnect-peer" type="button" class="min-button px-3.5 py-2 rounded-full text-xs font-medium text-rose-400 hover:text-rose-300">
+          <button id="btn-disconnect-peer" type="button" data-i18n="btn_disconnect" class="min-button px-3.5 py-2 rounded-full text-xs font-medium text-rose-400 hover:text-rose-300">
             Ngắt
           </button>
         </div>
@@ -429,20 +431,20 @@
     <div class="min-surface rounded-2xl p-4 shadow-2xl border border-zinc-800/90">
       <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-3 border-b border-zinc-800/80">
         <div class="flex items-center gap-2.5">
-          <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-300">Truyền tải P2P</h3>
+          <h3 data-i18n="drawer_title" class="text-xs font-semibold uppercase tracking-wider text-zinc-300">Truyền tải P2P</h3>
           <label class="inline-flex items-center gap-1.5 text-[11px] text-zinc-400 cursor-pointer select-none">
             <input id="toggle-auto-download" type="checkbox" class="rounded bg-zinc-900 border-zinc-700 text-white focus:ring-0" checked />
-            <span>Tự tải về</span>
+            <span data-i18n="drawer_auto_download">Tự tải về</span>
           </label>
         </div>
         <div class="flex items-center gap-2">
           <button id="btn-download-all" type="button" class="hidden px-3 py-1 rounded-full bg-white hover:bg-zinc-200 text-zinc-950 text-[11px] font-semibold transition">
             Tải tất cả (0)
           </button>
-          <button id="btn-open-downloads" type="button" class="hidden min-button px-2.5 py-1 rounded-full text-[11px] text-zinc-300 hover:text-white">
+          <button id="btn-open-downloads" type="button" data-i18n="drawer_open_folder" class="hidden min-button px-2.5 py-1 rounded-full text-[11px] text-zinc-300 hover:text-white">
             Mở thư mục
           </button>
-          <button id="btn-clear-completed" type="button" class="text-[11px] text-zinc-500 hover:text-zinc-300 transition">
+          <button id="btn-clear-completed" type="button" data-i18n="drawer_clear_history" class="text-[11px] text-zinc-500 hover:text-zinc-300 transition">
             Xóa lịch sử
           </button>
           <button id="btn-close-transfers" type="button" class="text-zinc-400 hover:text-white">
@@ -454,7 +456,7 @@
       </div>
 
       <!-- Empty State inside Drawer -->
-      <div id="transfers-empty-state" class="py-6 text-center text-xs text-zinc-500">
+      <div id="transfers-empty-state" data-i18n="drawer_empty" class="py-6 text-center text-xs text-zinc-500">
         Chưa có phiên truyền file nào. Chạm vào thiết bị trên Radar để gửi file.
       </div>
 
@@ -470,17 +472,17 @@
     <div class="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs text-zinc-400">
       <span class="inline-flex items-center gap-1.5">
         <span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>
-        <span>Thiết bị của bạn: <strong id="my-device-display-name" class="text-zinc-200 font-medium">Đang nhận diện...</strong></span>
+        <span><span data-i18n="footer_your_device">Thiết bị của bạn:</span> <strong id="my-device-display-name" class="text-zinc-200 font-medium">Đang nhận diện...</strong></span>
       </span>
       <span id="desktop-hw-badge" class="hidden px-2 py-0.5 rounded-full bg-zinc-900/90 border border-white/10 text-[10px] font-mono text-emerald-300">
         Multi-GPU 60Hz Ready
       </span>
       <span class="text-zinc-700 hidden sm:inline">•</span>
-      <button id="btn-configure-turn-inline" type="button" class="text-zinc-400 hover:text-white underline underline-offset-4 whitespace-nowrap transition">
+      <button id="btn-configure-turn-inline" type="button" data-i18n="footer_settings_link" class="text-zinc-400 hover:text-white underline underline-offset-4 whitespace-nowrap transition">
         Cài đặt 4G &amp; Bảo mật
       </button>
     </div>
-    <p class="text-[11px] text-zinc-500">
+    <p data-i18n="footer_e2ee_summary" class="text-[11px] text-zinc-500">
       Mã hóa đầu-cuối (DTLS / AES-256-GCM) • Tự động xuyên 4G/5G • Toàn vẹn SHA-256
     </p>
   </footer>
@@ -491,7 +493,7 @@
   <div id="qr-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
     <div class="min-surface w-full max-w-sm rounded-3xl p-6 text-center space-y-4 shadow-2xl">
       <div class="flex items-center justify-between">
-        <span class="text-xs font-semibold uppercase tracking-wider text-zinc-400">Quét QR Kết Nối</span>
+        <span data-i18n="qr_title" class="text-xs font-semibold uppercase tracking-wider text-zinc-400">Quét QR Kết Nối</span>
         <button id="btn-close-qr-modal" type="button" class="p-1 rounded-full text-zinc-400 hover:text-white">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -504,21 +506,22 @@
       </div>
 
       <div>
-        <div class="text-[11px] text-zinc-500">Mã phòng của bạn</div>
+        <div data-i18n="qr_your_room" class="text-[11px] text-zinc-500">Mã phòng của bạn</div>
         <div id="qr-modal-room-id" class="font-mono text-2xl font-bold tracking-[0.22em] text-white mt-0.5">------</div>
       </div>
 
-      <div id="localhost-warning-banner" class="hidden rounded-2xl bg-amber-500/10 border border-amber-500/25 px-3 py-2 text-[11px] text-amber-200 text-left leading-relaxed">
-        Đang chạy tại <code class="font-mono text-amber-100">localhost</code>. Link &amp; QR đã tự đổi sang địa chỉ mạng để điện thoại mở được (tránh lỗi Safari không kết nối được localhost).
+      <div id="localhost-warning-banner" data-i18n="qr_localhost_warn" class="hidden rounded-2xl bg-amber-500/10 border border-amber-500/25 px-3 py-2 text-[11px] text-amber-200 text-left leading-relaxed">
+        Đang chạy tại localhost. Link &amp; QR đã tự đổi sang địa chỉ mạng để điện thoại mở được (tránh lỗi Safari không kết nối được localhost).
       </div>
 
       <div class="text-left space-y-1.5">
-        <label for="share-base-url-input" class="block text-[11px] font-medium text-zinc-400">
+        <label for="share-base-url-input" data-i18n="qr_share_url_label" class="block text-[11px] font-medium text-zinc-400">
           Đường dẫn chia sẻ (Tránh lỗi localhost trên điện thoại)
         </label>
         <input
           id="share-base-url-input"
           type="url"
+          data-i18n-placeholder="qr_share_url_placeholder"
           placeholder="https://... hoặc http://192.168.1.x:8123"
           autocomplete="off"
           spellcheck="false"
@@ -526,7 +529,7 @@
         />
       </div>
 
-      <button id="btn-copy-link-modal" type="button" class="w-full py-2.5 px-4 rounded-full bg-white hover:bg-zinc-200 text-zinc-950 font-semibold text-xs transition">
+      <button id="btn-copy-link-modal" type="button" data-i18n="qr_copy_btn" class="w-full py-2.5 px-4 rounded-full bg-white hover:bg-zinc-200 text-zinc-950 font-semibold text-xs transition">
         Copy Link Tự Động Kết Nối
       </button>
     </div>
@@ -538,7 +541,7 @@
   <div id="text-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
     <div class="min-surface w-full max-w-md rounded-3xl p-6 space-y-4 shadow-2xl">
       <div class="flex items-center justify-between">
-        <h3 class="text-sm font-semibold text-white">Gửi Nhanh Văn Bản / Đường Link</h3>
+        <h3 data-i18n="text_modal_title" class="text-sm font-semibold text-white">Gửi Nhanh Văn Bản / Đường Link</h3>
         <button id="btn-close-text-modal" type="button" class="p-1 rounded-full text-zinc-400 hover:text-white">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -549,14 +552,15 @@
         <textarea
           id="text-message-input"
           rows="4"
+          data-i18n-placeholder="text_modal_placeholder"
           placeholder="Dán đường link hoặc nội dung văn bản cần gửi..."
           class="w-full bg-zinc-950/90 border border-zinc-800 focus:border-zinc-500 rounded-2xl p-3.5 text-xs text-white placeholder:text-zinc-600 outline-none resize-none"
         ></textarea>
         <div class="flex justify-end gap-2">
-          <button id="btn-cancel-text" type="button" class="min-button px-4 py-2 rounded-full text-xs text-zinc-300">
+          <button id="btn-cancel-text" type="button" data-i18n="btn_cancel" class="min-button px-4 py-2 rounded-full text-xs text-zinc-300">
             Hủy
           </button>
-          <button type="submit" class="px-5 py-2 rounded-full bg-white hover:bg-zinc-200 text-zinc-950 font-semibold text-xs transition">
+          <button type="submit" data-i18n="btn_send_now" class="px-5 py-2 rounded-full bg-white hover:bg-zinc-200 text-zinc-950 font-semibold text-xs transition">
             Gửi ngay
           </button>
         </div>
@@ -570,7 +574,7 @@
   <div id="received-text-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
     <div class="min-surface w-full max-w-md rounded-3xl p-6 space-y-4 shadow-2xl">
       <div class="flex items-center justify-between">
-        <h3 class="text-sm font-semibold text-white">Tin Nhắn / Link Nhận Được</h3>
+        <h3 data-i18n="recv_text_title" class="text-sm font-semibold text-white">Tin Nhắn / Link Nhận Được</h3>
         <button id="btn-close-received-text" type="button" class="p-1 rounded-full text-zinc-400 hover:text-white">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -579,7 +583,7 @@
       </div>
       <div id="received-text-content" class="bg-zinc-950 border border-zinc-800 rounded-2xl p-3.5 text-xs font-mono text-zinc-200 break-words max-h-60 overflow-y-auto select-text"></div>
       <div class="flex justify-end gap-2">
-        <button id="btn-copy-received-text" type="button" class="px-5 py-2 rounded-full bg-white hover:bg-zinc-200 text-zinc-950 font-semibold text-xs transition">
+        <button id="btn-copy-received-text" type="button" data-i18n="btn_copy_content" class="px-5 py-2 rounded-full bg-white hover:bg-zinc-200 text-zinc-950 font-semibold text-xs transition">
           Sao chép nội dung
         </button>
       </div>
@@ -593,8 +597,8 @@
     <div class="min-surface w-full max-w-lg rounded-3xl border border-zinc-800 shadow-2xl overflow-hidden">
       <div class="px-6 py-4 border-b border-zinc-800/80 flex items-center justify-between">
         <div>
-          <h3 class="text-sm font-semibold text-white">Cấu Hình Mạng WebRTC (STUN / TURN 4G)</h3>
-          <p class="text-[11px] text-zinc-400 mt-0.5">Đảm bảo gửi file thành công 100% qua mạng di động 4G/5G</p>
+          <h3 data-i18n="settings_title" class="text-sm font-semibold text-white">Cài Đặt &amp; Mạng WebRTC (STUN / TURN 4G)</h3>
+          <p data-i18n="settings_subtitle" class="text-[11px] text-zinc-400 mt-0.5">Đảm bảo gửi file thành công 100% qua mạng di động 4G/5G</p>
         </div>
         <button id="btn-close-settings" type="button" class="p-1.5 rounded-full text-zinc-400 hover:text-white hover:bg-zinc-800 transition">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -604,12 +608,30 @@
       </div>
 
       <form id="turn-settings-form" class="p-6 space-y-4 max-h-[80vh] overflow-y-auto">
+        <!-- Language Selection (Tiếng Việt / English) -->
+        <div class="p-3 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 text-xs space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <div>
+              <div data-i18n="settings_lang_title" class="font-semibold text-white">Ngôn ngữ</div>
+              <div data-i18n="settings_lang_desc" class="text-[11px] text-zinc-500">Chuyển đổi ngôn ngữ hiển thị phần mềm</div>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button id="btn-lang-vi" type="button" class="theme-choice-btn is-active px-3 py-1.5 rounded-full text-[11px] font-semibold">
+                Tiếng Việt
+              </button>
+              <button id="btn-lang-en" type="button" class="theme-choice-btn px-3 py-1.5 rounded-full text-[11px] font-semibold">
+                English
+              </button>
+            </div>
+          </div>
+        </div>
+
         <!-- Theme Selection (Dark / Lightning Bright Mode) -->
         <div class="p-3 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 text-xs space-y-2">
           <div class="flex items-center justify-between gap-2">
             <div>
-              <div class="font-semibold text-white">Giao diện hiển thị</div>
-              <div class="text-[11px] text-zinc-500">Chuyển đổi nhanh giữa Dark và Lightning sáng</div>
+              <div data-i18n="settings_theme_title" class="font-semibold text-white">Giao diện hiển thị</div>
+              <div data-i18n="settings_theme_desc" class="text-[11px] text-zinc-500">Chuyển đổi nhanh giữa Dark và Lightning sáng</div>
             </div>
             <div class="flex items-center gap-1.5 shrink-0">
               <button id="btn-theme-dark" type="button" class="theme-choice-btn is-active px-3 py-1.5 rounded-full text-[11px] font-semibold flex items-center gap-1.5">
@@ -632,8 +654,8 @@
         <!-- Custom Save Folder Selection -->
         <div id="save-dir-section" class="p-3 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 text-xs space-y-2">
           <div class="flex items-center justify-between gap-2">
-            <label for="save-dir-input" class="font-semibold text-white">Thư mục lưu file nhận được</label>
-            <button id="btn-reset-save-dir" type="button" class="text-[11px] clevante-accent-text hover:underline transition">
+            <label for="save-dir-input" data-i18n="settings_savedir_title" class="font-semibold text-white">Thư mục lưu file nhận được</label>
+            <button id="btn-reset-save-dir" type="button" data-i18n="btn_default" class="text-[11px] clevante-accent-text hover:underline transition">
               Mặc định
             </button>
           </div>
@@ -641,6 +663,7 @@
             <input
               id="save-dir-input"
               type="text"
+              data-i18n-placeholder="settings_savedir_placeholder"
               placeholder="Thư mục Downloads mặc định"
               autocomplete="off"
               spellcheck="false"
@@ -650,14 +673,14 @@
               <svg class="w-3.5 h-3.5 clevante-accent-text shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" />
               </svg>
-              <span>Chọn...</span>
+              <span data-i18n="btn_choose">Chọn...</span>
             </button>
           </div>
           <p id="save-dir-hint" class="text-[11px] text-zinc-500 leading-snug">File gửi sang sẽ được lưu tự động vào thư mục này.</p>
         </div>
 
         <div class="p-3 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 text-xs space-y-1">
-          <div class="font-medium text-zinc-200">STUN Server mặc định (Luôn bật):</div>
+          <div data-i18n="settings_stun_title" class="font-medium text-zinc-200">STUN Server mặc định (Luôn bật):</div>
           <p class="font-mono text-[11px] text-zinc-500">
             stun:stun.l.google.com:19302, stun:stun1.l.google.com:19302, stun:stun.cloudflare.com:3478
           </p>
@@ -665,8 +688,8 @@
 
         <div class="flex items-center justify-between pt-1">
           <div>
-            <label for="turn-enabled" class="text-xs font-semibold text-white">Kích hoạt TURN Server (Open Relay / Metered / Cloudflare)</label>
-            <p class="text-[11px] text-zinc-500">Dùng khi 2 máy khác Wi-Fi hoặc dùng mạng 4G/5G Symmetric NAT</p>
+            <label for="turn-enabled" data-i18n="settings_turn_enable" class="text-xs font-semibold text-white">Kích hoạt TURN Server (Open Relay / Metered / Cloudflare)</label>
+            <p data-i18n="settings_turn_desc" class="text-[11px] text-zinc-500">Dùng khi 2 máy khác Wi-Fi hoặc dùng mạng 4G/5G Symmetric NAT</p>
           </div>
           <input id="turn-enabled" type="checkbox" class="w-4 h-4 rounded bg-zinc-900 border-zinc-700 text-white focus:ring-0 cursor-pointer" />
         </div>
@@ -706,7 +729,7 @@
           </div>
 
           <details class="bg-zinc-950/60 border border-zinc-800/80 rounded-xl p-3 text-xs">
-            <summary class="cursor-pointer font-medium text-zinc-300 hover:text-white select-none">
+            <summary data-i18n="settings_json_summary" class="cursor-pointer font-medium text-zinc-300 hover:text-white select-none">
               Dán nhanh mảng JSON iceServers từ Metered Dashboard
             </summary>
             <div class="mt-2.5 space-y-2">
@@ -716,37 +739,38 @@
                 placeholder='[{"urls":"turn:global.relay.metered.ca:80","username":"...","credential":"..."}]'
                 class="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-[11px] font-mono text-zinc-200 placeholder:text-zinc-700 outline-none"
               ></textarea>
-              <button id="btn-parse-turn-json" type="button" class="min-button px-3 py-1.5 rounded-full text-xs text-zinc-200">
+              <button id="btn-parse-turn-json" type="button" data-i18n="settings_json_btn" class="min-button px-3 py-1.5 rounded-full text-xs text-zinc-200">
                 Trích xuất từ JSON
               </button>
             </div>
           </details>
 
           <div class="pt-2 border-t border-zinc-800/80 space-y-1.5">
-            <label for="security-pin-input" class="block text-xs font-medium text-zinc-300">
+            <label for="security-pin-input" data-i18n="settings_pin_label" class="block text-xs font-medium text-zinc-300">
               Mã PIN Bảo Mật tùy chọn (4–8 ký tự)
             </label>
             <input
               id="security-pin-input"
               type="password"
               maxlength="8"
+              data-i18n-placeholder="settings_pin_placeholder"
               placeholder="Để trống nếu chỉ dùng xác nhận Đồng ý"
               autocomplete="off"
               class="w-full bg-zinc-950 border border-zinc-800 focus:border-zinc-500 rounded-xl px-3.5 py-2 text-xs font-mono text-white placeholder:text-zinc-700 outline-none"
             />
-            <p class="text-[11px] text-zinc-500">Nếu đặt mã PIN, thiết bị khác khi muốn kết nối phải nhập đúng mã PIN này trước khi bạn phê duyệt.</p>
+            <p data-i18n="settings_pin_desc" class="text-[11px] text-zinc-500">Nếu đặt mã PIN, thiết bị khác khi muốn kết nối phải nhập đúng mã PIN này trước khi bạn phê duyệt.</p>
           </div>
         </div>
 
         <div class="pt-3 border-t border-zinc-800/80 flex items-center justify-between gap-2">
-          <button id="btn-reset-turn" type="button" class="text-xs text-zinc-500 hover:text-zinc-300 transition">
+          <button id="btn-reset-turn" type="button" data-i18n="btn_reset_default" class="text-xs text-zinc-500 hover:text-zinc-300 transition">
             Khôi phục mặc định
           </button>
           <div class="flex items-center gap-2">
-            <button id="btn-cancel-settings" type="button" class="min-button px-4 py-2 rounded-full text-xs text-zinc-300">
+            <button id="btn-cancel-settings" type="button" data-i18n="btn_close" class="min-button px-4 py-2 rounded-full text-xs text-zinc-300">
               Đóng
             </button>
-            <button type="submit" class="px-5 py-2 rounded-full bg-white hover:bg-zinc-200 text-zinc-950 text-xs font-semibold transition">
+            <button type="submit" data-i18n="btn_save_settings" class="px-5 py-2 rounded-full bg-white hover:bg-zinc-200 text-zinc-950 text-xs font-semibold transition">
               Lưu cấu hình
             </button>
           </div>
@@ -780,7 +804,7 @@
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2">
           <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
-          <h3 class="text-sm font-semibold text-white">Yêu Cầu Kết Nối P2P</h3>
+          <h3 data-i18n="consent_title" class="text-sm font-semibold text-white">Yêu Cầu Kết Nối P2P</h3>
         </div>
         <span id="consent-countdown" class="font-mono text-xs px-2 py-0.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400">30s</span>
       </div>
@@ -790,23 +814,24 @@
           <span id="consent-peer-name" class="text-xs font-semibold text-white truncate">Thiết bị lạ</span>
           <span id="consent-peer-id" class="font-mono text-xs px-2 py-0.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-300 shrink-0">------</span>
         </div>
-        <p class="text-[11px] text-zinc-500">muốn ghép nối truyền file trực tiếp với thiết bị này.</p>
+        <p data-i18n="consent_wants_pair" class="text-[11px] text-zinc-500">muốn ghép nối truyền file trực tiếp với thiết bị này.</p>
       </div>
 
       <div class="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 text-center space-y-1">
-        <div class="text-[10px] uppercase tracking-wider text-emerald-400 font-medium">Mã Xác Thực Bảo Mật (SAS)</div>
+        <div data-i18n="consent_sas_title" class="text-[10px] uppercase tracking-wider text-emerald-400 font-medium">Mã Xác Thực Bảo Mật (SAS)</div>
         <div id="consent-sas-code" class="font-mono text-2xl font-bold tracking-[0.25em] text-emerald-300">--- ---</div>
-        <p class="text-[10px] text-zinc-400">Kiểm tra mã này khớp với màn hình thiết bị kia để chống nghe lén MITM.</p>
+        <p data-i18n="consent_sas_desc" class="text-[10px] text-zinc-400">Kiểm tra mã này khớp với màn hình thiết bị kia để chống nghe lén MITM.</p>
       </div>
 
       <div id="consent-pin-wrapper" class="hidden space-y-1.5">
-        <label for="consent-pin-input" class="block text-[11px] font-medium text-zinc-300">
+        <label for="consent-pin-input" data-i18n="consent_pin_label" class="block text-[11px] font-medium text-zinc-300">
           Xác nhận Mã PIN Bảo Mật của bạn (nếu cần):
         </label>
         <input
           id="consent-pin-input"
           type="password"
           maxlength="8"
+          data-i18n-placeholder="consent_pin_placeholder"
           placeholder="Nhập mã PIN bảo mật..."
           autocomplete="off"
           class="w-full bg-zinc-950 border border-zinc-800 focus:border-zinc-500 rounded-xl px-3.5 py-2 text-xs font-mono text-white placeholder:text-zinc-600 outline-none"
@@ -815,27 +840,27 @@
 
       <label class="flex items-start gap-2 text-[11px] text-zinc-400 cursor-pointer select-none">
         <input id="consent-trust-checkbox" type="checkbox" class="mt-0.5 rounded bg-zinc-900 border-zinc-700 text-white focus:ring-0" checked />
-        <span>Tin cậy thiết bị này trong phiên này (Tự động nối lại khi rớt 4G)</span>
+        <span data-i18n="consent_trust">Tin cậy thiết bị này trong phiên này (Tự động nối lại khi rớt 4G)</span>
       </label>
 
       <!-- Desktop-Only Explicit Remote Control Permission Opt-In -->
       <div id="consent-remote-control-box" class="hidden p-3 rounded-2xl bg-amber-500/10 border border-amber-500/25 space-y-2">
-        <div class="text-[11px] font-semibold text-amber-300">Quyền điều khiển máy tính (Tùy chọn)</div>
+        <div data-i18n="consent_rc_title" class="text-[11px] font-semibold text-amber-300">Quyền điều khiển máy tính (Tùy chọn)</div>
         <label class="flex items-start gap-2 text-[11px] text-zinc-200 cursor-pointer select-none">
           <input id="consent-allow-remote-checkbox" type="checkbox" class="mt-0.5 rounded bg-zinc-900 border-zinc-700 text-white focus:ring-0" />
-          <span>Cho phép điều khiển chuột, bàn phím &amp; âm lượng PC này</span>
+          <span data-i18n="consent_allow_remote">Cho phép điều khiển chuột, bàn phím &amp; âm lượng PC này</span>
         </label>
         <label class="flex items-start gap-2 text-[11px] text-zinc-300 cursor-pointer select-none">
           <input id="consent-allow-screen-checkbox" type="checkbox" class="mt-0.5 rounded bg-zinc-900 border-zinc-700 text-white focus:ring-0" />
-          <span>Tự động chia sẻ màn hình PC độ trễ thấp</span>
+          <span data-i18n="consent_allow_screen">Tự động chia sẻ màn hình PC độ trễ thấp</span>
         </label>
       </div>
 
       <div class="flex items-center gap-2 pt-1">
-        <button id="btn-reject-consent" type="button" class="flex-1 py-2.5 px-4 rounded-full min-button text-xs font-medium text-rose-400 hover:text-rose-300">
+        <button id="btn-reject-consent" type="button" data-i18n="consent_reject" class="flex-1 py-2.5 px-4 rounded-full min-button text-xs font-medium text-rose-400 hover:text-rose-300">
           Từ chối
         </button>
-        <button id="btn-accept-consent" type="button" class="flex-1 py-2.5 px-4 rounded-full bg-white hover:bg-zinc-200 text-zinc-950 text-xs font-semibold transition shadow-lg">
+        <button id="btn-accept-consent" type="button" data-i18n="consent_accept" class="flex-1 py-2.5 px-4 rounded-full bg-white hover:bg-zinc-200 text-zinc-950 text-xs font-semibold transition shadow-lg">
           Đồng ý kết nối
         </button>
       </div>
@@ -848,24 +873,25 @@
   <div id="pin-challenge-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md">
     <div class="min-surface w-full max-w-xs rounded-3xl p-6 space-y-4 shadow-2xl">
       <div class="flex items-center justify-between">
-        <h3 class="text-sm font-semibold text-white">Yêu Cầu Mã PIN Bảo Mật</h3>
+        <h3 data-i18n="pin_title" class="text-sm font-semibold text-white">Yêu Cầu Mã PIN Bảo Mật</h3>
         <button id="btn-close-pin-challenge" type="button" class="p-1 rounded-full text-zinc-400 hover:text-white">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
-      <p class="text-xs text-zinc-400">Thiết bị kia đang bật khóa PIN. Hãy nhập mã PIN để gửi yêu cầu kết nối:</p>
+      <p data-i18n="pin_desc" class="text-xs text-zinc-400">Thiết bị kia đang bật khóa PIN. Hãy nhập mã PIN để gửi yêu cầu kết nối:</p>
       <form id="pin-challenge-form" class="space-y-3">
         <input
           id="pin-challenge-input"
           type="password"
           maxlength="8"
+          data-i18n-placeholder="pin_placeholder"
           placeholder="Nhập mã PIN (4-8 ký tự)"
           autocomplete="off"
           class="w-full bg-zinc-950 border border-zinc-800 focus:border-zinc-500 rounded-xl px-3.5 py-2 text-xs font-mono text-white placeholder:text-zinc-600 outline-none"
         />
-        <button type="submit" class="w-full py-2.5 rounded-full bg-white hover:bg-zinc-200 text-zinc-950 text-xs font-semibold transition">
+        <button type="submit" data-i18n="pin_submit" class="w-full py-2.5 rounded-full bg-white hover:bg-zinc-200 text-zinc-950 text-xs font-semibold transition">
           Xác nhận &amp; Gửi yêu cầu
         </button>
       </form>
@@ -886,19 +912,19 @@
 
       <!-- Unified Quick Mode, Quality & Fullscreen Pills -->
       <div class="flex items-center gap-1 shrink-0">
-        <button id="rc-touch-mode-btn" type="button" title="Chuyển chế độ chạm trực tiếp hoặc rê chuột tương đối" class="min-button px-2 py-1 rounded-full text-[11px] font-medium text-emerald-300 border-emerald-500/35 whitespace-nowrap">
+        <button id="rc-touch-mode-btn" type="button" data-i18n-title="rc_title_touch" title="Chuyển chế độ chạm trực tiếp hoặc rê chuột tương đối" class="min-button px-2 py-1 rounded-full text-[11px] font-medium text-emerald-300 border-emerald-500/35 whitespace-nowrap">
           Cảm ứng
         </button>
-        <button id="rc-quality-btn" type="button" title="Đổi độ phân giải & tần số quét (60Hz)" class="min-button px-2 py-1 rounded-full text-[11px] font-mono text-zinc-200 whitespace-nowrap">
+        <button id="rc-quality-btn" type="button" data-i18n-title="rc_title_quality" title="Đổi độ phân giải & tần số quét (60Hz)" class="min-button px-2 py-1 rounded-full text-[11px] font-mono text-zinc-200 whitespace-nowrap">
           900p 60Hz
         </button>
-        <button id="rc-fullscreen-btn" type="button" title="Chế độ toàn màn hình cảm ứng" class="min-button px-2 py-1 rounded-full text-[11px] text-zinc-200 hover:text-white whitespace-nowrap">
+        <button id="rc-fullscreen-btn" type="button" data-i18n-title="rc_title_fs" title="Chế độ toàn màn hình cảm ứng" class="min-button px-2 py-1 rounded-full text-[11px] text-zinc-200 hover:text-white whitespace-nowrap">
           ⛶ Full
         </button>
-        <button id="rc-toggle-controls-btn" type="button" title="Ẩn/hiện thanh phím & chuột" class="hidden sm:inline-flex min-button px-2 py-1 rounded-full text-[11px] text-zinc-300 hover:text-white whitespace-nowrap">
+        <button id="rc-toggle-controls-btn" type="button" data-i18n="rc_hide_keys" data-i18n-title="rc_title_hide_keys" title="Ẩn/hiện thanh phím & chuột" class="hidden sm:inline-flex min-button px-2 py-1 rounded-full text-[11px] text-zinc-300 hover:text-white whitespace-nowrap">
           Ẩn phím
         </button>
-        <button id="btn-close-remote-control" type="button" class="min-button px-2 py-1 rounded-full text-[11px] text-zinc-300 hover:text-white whitespace-nowrap">
+        <button id="btn-close-remote-control" type="button" data-i18n="btn_close" class="min-button px-2 py-1 rounded-full text-[11px] text-zinc-300 hover:text-white whitespace-nowrap">
           Đóng
         </button>
       </div>
@@ -934,8 +960,8 @@
           <svg class="w-7 h-7 text-zinc-700" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5" />
           </svg>
-          <p class="text-xs font-medium text-zinc-400">Vuốt để di chuột • Bật màn hình PC để chạm, vuốt &amp; phóng to 60Hz</p>
-          <p class="text-[11px] text-zinc-600">1 ngón: Di chuột / Chạm • 2 ngón: Phóng to / Cuộn / Chuột phải</p>
+          <p data-i18n="rc_hint_1" class="text-xs font-medium text-zinc-400">Vuốt để di chuột • Bật màn hình PC để chạm, vuốt &amp; phóng to 60Hz</p>
+          <p data-i18n="rc_hint_2" class="text-[11px] text-zinc-600">1 ngón: Di chuột / Chạm • 2 ngón: Phóng to / Cuộn / Chuột phải</p>
         </div>
 
         <!-- Unified Full-Surface Touch & Mouse Gesture Layer -->
@@ -963,7 +989,7 @@
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
-          <span>Xem màn hình PC (60Hz Siêu mượt)</span>
+          <span data-i18n="rc_view_screen">Xem màn hình PC (60Hz Siêu mượt)</span>
         </button>
 
         <!-- Floating Live Resolution/FPS Badge + GPU Boost + Zoom Reset + Stop Pill -->
@@ -980,7 +1006,7 @@
           <span id="rc-video-res-badge" class="px-2 py-0.5 rounded-full bg-black/70 border border-zinc-700/80 text-[10px] font-mono text-emerald-300 backdrop-blur-md">
             LIVE 60Hz
           </span>
-          <button id="rc-btn-stop-screen" type="button" class="px-2.5 py-0.5 rounded-full bg-black/75 hover:bg-rose-500/80 border border-zinc-700/80 text-[10px] font-medium text-rose-300 hover:text-white backdrop-blur-md transition">
+          <button id="rc-btn-stop-screen" type="button" data-i18n="rc_stop" class="px-2.5 py-0.5 rounded-full bg-black/75 hover:bg-rose-500/80 border border-zinc-700/80 text-[10px] font-medium text-rose-300 hover:text-white backdrop-blur-md transition">
             Tắt
           </button>
         </div>
@@ -991,7 +1017,7 @@
             Di chuột
           </button>
           <button id="rc-btn-exit-fullscreen" type="button" class="px-3.5 py-2 rounded-full bg-white/95 hover:bg-white text-zinc-950 text-[11px] font-semibold shadow-2xl active:scale-95 transition flex items-center gap-1">
-            <span>✕ Thoát toàn màn hình</span>
+            <span data-i18n="rc_exit_fs">✕ Thoát toàn màn hình</span>
           </button>
         </div>
       </div>
@@ -1000,7 +1026,7 @@
       <div id="rc-controls-dock" class="w-full max-w-3xl mx-auto flex flex-col gap-2 shrink-0">
         <!-- Row 1: Explicit Mouse Controls -->
         <div class="grid grid-cols-4 gap-1.5">
-          <button id="rc-btn-left-click" type="button" class="min-button py-2 rounded-xl text-[11px] font-semibold text-zinc-200 active:bg-white active:text-zinc-950">
+          <button id="rc-btn-left-click" type="button" data-i18n="rc_left_click" class="min-button py-2 rounded-xl text-[11px] font-semibold text-zinc-200 active:bg-white active:text-zinc-950">
             Chuột trái
           </button>
           <button id="rc-swipe-action-btn" type="button" class="min-button py-2 rounded-xl text-[11px] font-medium text-emerald-300 border-emerald-500/35 truncate px-1.5">
@@ -1009,7 +1035,7 @@
           <button id="rc-btn-drag-toggle" type="button" class="min-button py-2 rounded-xl text-[11px] font-medium text-zinc-400 truncate px-1.5">
             Giữ kéo: TẮT
           </button>
-          <button id="rc-btn-right-click" type="button" class="min-button py-2 rounded-xl text-[11px] font-semibold text-zinc-200 active:bg-white active:text-zinc-950">
+          <button id="rc-btn-right-click" type="button" data-i18n="rc_right_click" class="min-button py-2 rounded-xl text-[11px] font-semibold text-zinc-200 active:bg-white active:text-zinc-950">
             Chuột phải
           </button>
         </div>
@@ -1019,11 +1045,12 @@
           <input
             id="rc-text-input"
             type="text"
+            data-i18n-placeholder="rc_type_placeholder"
             placeholder="Gõ chữ tiếng Việt gửi thẳng sang PC..."
             autocomplete="off"
             class="flex-1 bg-transparent px-3 py-1 text-xs text-white placeholder:text-zinc-600 outline-none"
           />
-          <button type="submit" class="px-3.5 py-1 rounded-full bg-white hover:bg-zinc-200 text-zinc-950 text-xs font-semibold shrink-0 transition">
+          <button type="submit" data-i18n="rc_type_btn" class="px-3.5 py-1 rounded-full bg-white hover:bg-zinc-200 text-zinc-950 text-xs font-semibold shrink-0 transition">
             Gõ phím
           </button>
         </form>
