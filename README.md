@@ -86,6 +86,31 @@ npx wrangler deploy
 
 ---
 
+## Comparison & Trade-offs
+
+| Feature | **SyloBeam** | AirDrop | PairDrop / LocalSend | AnyDesk / Parsec |
+| :--- | :--- | :--- | :--- | :--- |
+| **Platform support** | **Browser (Any OS) + Windows App** | Apple ecosystem only | Cross-platform | Requires native app on both ends |
+| **Account / Login required** | **No** (QR / 6-char code) | Apple ID | No | Required on Parsec / cloud sync |
+| **File size & speed limits** | **Unlimited** (Direct WebRTC P2P) | Unlimited | Unlimited (Local Wi-Fi / WebRTC) | Limited / Not built for raw photo drops |
+| **Works across 4G/5G NAT** | **Auto E2EE Edge Relay fallback** | Local proximity only | Local Wi-Fi (PairDrop needs custom TURN for cellular) | Built-in proprietary relays |
+| **PC Remote Control** | **60Hz DXGI + Touchscreen + Pinch-Zoom** | No | No | Yes (AnyDesk/Parsec core focus) |
+| **Self-hostable & Open Source** | **MIT License** | Proprietary | Open Source (GPL / MIT) | Closed Source |
+
+### Strengths (Pros)
+* **All-in-one without bloat:** Combines PairDrop/AirDrop-grade instant file transfer with browser-accessible **60Hz Windows remote control** in a zero-login web app and a tiny ~1.2 MB Windows installer.
+* **True zero-friction cross-OS pairing:** Share original photos/videos between iPhone, Android, macOS, Linux, and Windows over local Wi-Fi or cellular 4G/5G without installing anything on the phone.
+* **Privacy by architecture:** Zero server file persistence, per-file SHA-256 verification, 6-digit SAS anti-MITM confirmation, and two-way explicit consent on every connection.
+
+### Honest Limitations & Trade-offs (Cons)
+* **1-to-1 active session per code:** Each room supports **2 paired devices at a time** (optimized for secure Phone ↔ PC or Person ↔ Person links rather than multi-user broadcast hubs).
+* **Remote desktop host is Windows-only:** While any OS/browser can send/receive files and *control* a PC, the **60Hz DXGI host screen-capture & Win32 mouse/keyboard agent** currently runs on Windows only (macOS/Linux host agents are not implemented yet).
+* **Browser RAM limit for gigantic files:** In web-only mode on mobile Safari, saving massive single files (multi-GB) buffers via browser blobs (whereas the Windows Desktop App writes incoming chunks safely to your chosen disk folder).
+* **Unsigned Windows installer (`SyloBeam-Setup.exe`):** Because no commercial EV code-signing certificate is bundled yet, Windows SmartScreen may show a warning on first run (*More info → Run anyway*).
+* **Free-tier signaling / relay dependency:** Default public `0.peerjs.com` signaling or Cloudflare Workers Free Tier Relay (`100k requests/day`) can throttle under heavy public 4G/5G relay traffic unless self-hosted or upgraded.
+
+---
+
 ## Project Structure
 
 ```text
@@ -112,6 +137,21 @@ npx wrangler deploy
 * **Bảo mật đầu-cuối:** Mã hóa DTLS / AES-256-GCM, mã xác thực 6 số SAS, hỏi xác nhận hai chiều, kiểm tra toàn vẹn SHA-256 từng file và phím tắt ngắt khẩn cấp `Ctrl + Alt + Esc`.
 * **Giao diện song ngữ & 3D:** Hỗ trợ chuyển **Tiếng Việt / English** trong Cài đặt, chế độ tối **Dark** & sáng **Lightning**, mô phỏng Trái Đất 3D vệ tinh NASA theo thời gian thực.
 * **Dùng ngay:** Truy cập **[https://sylobeam.pages.dev/](https://sylobeam.pages.dev/)** hoặc tải bộ cài Windows **`SyloBeam-Setup.exe`** từ trang [Releases](https://github.com/nghtrung180905-afk/sylobeam/releases/latest).
+
+### Ưu điểm & Nhược điểm so với các phần mềm khác
+
+**Ưu điểm nổi bật:**
+* **2 trong 1 gọn nhẹ:** Vừa truyền ảnh/video/file gốc không giới hạn như AirDrop / PairDrop / LocalSend, vừa **điều khiển PC 60Hz (cảm ứng chạm, Trackpad, zoom 2 ngón, gõ tiếng Việt)** ngay trên trình duyệt điện thoại mà không cần cài thêm app remote riêng.
+* **Không kén hệ điều hành & không cần tài khoản:** Chạy chéo iPhone ↔ Android ↔ macOS ↔ Windows tức thì qua mã QR hoặc mã 6 ký tự.
+* **Tự động xuyên 4G/5G:** Khác với nhiều tool P2P miễn phí chỉ chạy được trong cùng mạng Wi-Fi, SyloBeam tự chuyển sang **Cloudflare Edge Relay mã hóa E2EE** khi mạng di động chặn P2P.
+* **An toàn & Minh bạch:** Không lưu file lên server, bắt buộc xác nhận 2 chiều, đối chiếu mã SAS 6 số, kiểm tra SHA-256 và bấm `Ctrl + Alt + Esc` để ngắt quyền điều khiển ngay lập tức.
+
+**Nhược điểm / Giới hạn hiện tại (cần biết trước khi dùng):**
+* **Kết nối 1-đối-1 theo phiên:** Mỗi phòng chỉ ghép tối đa **2 thiết bị cùng lúc** (chưa hỗ trợ phát broadcast cho nhiều máy nhận cùng một file một lúc).
+* **Máy được điều khiển (Host) mới hỗ trợ Windows:** Điện thoại hay macOS có thể truyền file và *điều khiển* máy tính Windows 60Hz, nhưng chưa có phần mềm Host để điều khiển ngược lại macOS hay Linux.
+* **File quá nặng trên trình duyệt điện thoại:** Gửi file vài chục GB cùng lúc hoàn toàn tốt giữa 2 máy qua App Windows lưu thẳng xuống ổ cứng; còn nếu nhận trực tiếp trên trình duyệt iOS/Safari, bộ nhớ RAM trình duyệt có giới hạn tự nhiên với file siêu lớn.
+* **Cảnh báo SmartScreen lần đầu trên Windows:** Vì bộ cài `SyloBeam-Setup.exe` là bản cộng đồng chưa mua chứng thư ký số trả phí (EV Code Signing), lần đầu mở trên máy mới Windows sẽ hỏi xác nhận (*More info → Run anyway*).
+* **Giới hạn hạ tầng miễn phí cho Relay 4G/5G:** Truyền P2P cùng Wi-Fi không giới hạn, nhưng nếu cực nhiều người cùng bật chế độ **xuyên 4G/5G qua Relay** miễn phí cùng lúc sẽ chạm hạn mức 100.000 request/ngày của gói Cloudflare Free (có thể tự host lại trong 1 lệnh `wrangler deploy`).
 
 ![SyloBeam Vietnamese Dark Mode Preview](./docs/preview-dark.png)
 
