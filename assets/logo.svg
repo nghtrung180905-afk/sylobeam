@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- Obsidian Squircle Chassis (Grok / X / Kimi / Kling Monochrome Studio Base) -->
+  <rect x="4" y="4" width="504" height="504" rx="116" fill="#000000"/>
+  <rect x="4" y="4" width="504" height="504" rx="116" stroke="#ffffff" stroke-opacity="0.12" stroke-width="2"/>
+
+  <!-- Upper-Left Crisp White S-Conduit -->
+  <path d="M 334 130
+           L 202 130
+           C 134 130 98 162 98 202
+           C 98 242 134 264 194 264
+           L 290 264
+           L 328 208
+           L 198 208
+           C 178 208 170 200 170 191
+           C 170 182 178 176 198 176
+           L 299 176 Z" fill="#ffffff"/>
+  <!-- Upper-Left Folded Ribbon Graphite Bevel -->
+  <path d="M 290 264 L 328 208 L 270 208 L 232 264 Z" fill="#78808c"/>
+
+  <!-- Lower-Right Crisp White S-Conduit (180-deg Symmetric Twin around 230,276) -->
+  <path d="M 126 422
+           L 258 422
+           C 326 422 362 390 362 350
+           C 362 310 326 288 266 288
+           L 170 288
+           L 132 344
+           L 262 344
+           C 282 344 290 352 290 361
+           C 290 370 282 376 262 376
+           L 161 376 Z" fill="#ffffff"/>
+  <!-- Lower-Right Folded Ribbon Graphite Bevel -->
+  <path d="M 170 288 L 132 344 L 190 344 L 228 288 Z" fill="#78808c"/>
+
+  <!-- Kimi-Style Signature Electric Azure Drop Accent -->
+  <path d="M 362 144 L 362 114 A 38 38 0 1 1 400 152 L 370 152 A 8 8 0 0 1 362 144 Z" fill="#1d8cff"/>
+</svg>

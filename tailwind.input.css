@@ -1,0 +1,532 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+html[data-theme="dark"] {
+  --bg: #08090b;
+  --surface: #101216;
+  --fg: #f4f5f7;
+  --muted: #888d96;
+  --line: rgba(255, 255, 255, 0.09);
+  --line-soft: rgba(255, 255, 255, 0.05);
+  --accent: #7da3c0;
+  --accent-dim: rgba(125, 163, 192, 0.16);
+  color-scheme: dark;
+}
+
+html[data-theme="light"] {
+  --bg: #edf1f7;
+  --surface: rgba(255, 255, 255, 0.88);
+  --fg: #0d131c;
+  --muted: #475569;
+  --line: rgba(15, 23, 42, 0.11);
+  --line-soft: rgba(15, 23, 42, 0.06);
+  --accent: #2a5f8a;
+  --accent-dim: rgba(42, 95, 138, 0.14);
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  overflow-x: hidden;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: -0.005em;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+code, .font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* Clevante.cz Interplanetary Obsidian Space Backdrop & Ice-Steel Planetary Horizon */
+.grok-atmosphere {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 85% 58% at 50% 108%, rgba(125, 163, 192, 0.22) 0%, rgba(125, 163, 192, 0.07) 42%, transparent 74%),
+    radial-gradient(ellipse 68% 48% at 86% 6%, rgba(232, 240, 250, 0.075), rgba(125, 163, 192, 0.02) 48%, transparent 72%),
+    radial-gradient(ellipse 60% 45% at 14% 82%, rgba(125, 163, 192, 0.055), transparent 65%);
+}
+
+.grok-horizon {
+  position: fixed;
+  left: -18%;
+  right: -18%;
+  bottom: -48%;
+  height: 76vh;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  border-top: 1px solid rgba(125, 163, 192, 0.34);
+  background: radial-gradient(ellipse 75% 45% at 50% 0%, rgba(232, 240, 250, 0.13) 0%, rgba(125, 163, 192, 0.06) 34%, transparent 72%);
+  box-shadow: 0 -24px 90px -10px rgba(125, 163, 192, 0.22);
+}
+
+.grok-title-gradient {
+  background: linear-gradient(135deg, #f4f5f7 0%, #dbe6f0 55%, #7da3c0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.grok-grid {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(232, 240, 250, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232, 240, 250, 0.022) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse 76% 65% at 50% 45%, #000 18%, transparent 78%);
+  mask-image: radial-gradient(ellipse 76% 65% at 50% 45%, #000 18%, transparent 78%);
+}
+
+/* Clevante Colossal Ghost Watermark + Architectural Eyebrow + Skewed Slash */
+.clevante-watermark {
+  position: absolute;
+  left: 50%;
+  top: 29%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(3.4rem, 15vw, 9.2rem);
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  line-height: 0.88;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  background: linear-gradient(90deg, rgba(244, 245, 247, 0.02) 0%, rgba(244, 245, 247, 0.14) 24%, rgba(244, 245, 247, 0.36) 50%, rgba(244, 245, 247, 0.14) 76%, rgba(244, 245, 247, 0.02) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 66%, transparent 98%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 66%, transparent 98%);
+}
+
+.clevante-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.clevante-eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.8;
+}
+
+.clevante-headline {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  line-height: 0.96;
+  color: var(--fg);
+}
+
+.clevante-slash {
+  display: inline-block;
+  position: relative;
+  width: 0.34em;
+  height: 0.82em;
+  vertical-align: -0.06em;
+  margin: 0 0.08em;
+}
+
+.clevante-slash::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0.08em;
+  height: 100%;
+  background: var(--accent);
+  transform: translateX(-50%) skew(-16deg);
+}
+
+.clevante-arrow-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  transition: border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1), transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.min-button:hover .clevante-arrow-circle {
+  border-color: rgba(125, 163, 192, 0.72);
+  transform: translateX(2px);
+}
+
+/* Concentric Orbital Waves + Chrome Telemetry Scanner */
+.radar-ring {
+  position: absolute;
+  border-radius: 9999px;
+  border: 1px solid rgba(232, 240, 250, 0.055);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+}
+
+.radar-sweep {
+  position: absolute;
+  width: 560px;
+  height: 560px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  pointer-events: none;
+  background: conic-gradient(from 0deg, transparent 275deg, rgba(125, 163, 192, 0.11) 335deg, rgba(244, 245, 247, 0.12) 360deg);
+  -webkit-mask-image: radial-gradient(circle, transparent 18%, #000 35%, transparent 72%);
+  mask-image: radial-gradient(circle, transparent 18%, #000 35%, transparent 72%);
+  animation: radarSpin 8s linear infinite;
+}
+
+@keyframes radarSpin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.radar-pulse {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 9999px;
+  border: 1px solid rgba(125, 163, 192, 0.22);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  opacity: 0;
+  pointer-events: none;
+  animation: radarRipple 4.5s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.radar-pulse-delayed {
+  animation-delay: 2.25s;
+}
+
+@keyframes radarRipple {
+  0% {
+    transform: translate(-50%, -50%) scale(0.7);
+    opacity: 0.55;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(4.8);
+    opacity: 0;
+  }
+}
+
+/* Clevante Obsidian Slate Surface (#101216) & Specular Hairline Controls */
+.min-surface {
+  background: linear-gradient(180deg, rgba(20, 22, 28, 0.88) 0%, rgba(16, 18, 22, 0.92) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px 0 rgba(232, 240, 250, 0.1), 0 18px 44px -14px rgba(0, 0, 0, 0.72);
+}
+
+.min-button {
+  background: rgba(16, 18, 22, 0.9);
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px 0 rgba(232, 240, 250, 0.05);
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.min-button:hover {
+  background: rgba(28, 32, 40, 0.96);
+  border-color: rgba(125, 163, 192, 0.5);
+  box-shadow: 0 0 22px -6px rgba(125, 163, 192, 0.28);
+}
+
+.grok-neon-pill {
+  background: linear-gradient(180deg, rgba(16, 18, 22, 0.92) 0%, rgba(8, 9, 11, 0.94) 100%);
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px 0 rgba(125, 163, 192, 0.28), 0 8px 24px -8px rgba(0, 0, 0, 0.75);
+}
+
+.grok-gpu-btn {
+  background: linear-gradient(180deg, rgba(125, 163, 192, 0.28) 0%, rgba(65, 96, 122, 0.42) 100%);
+  border: 1px solid rgba(125, 163, 192, 0.55);
+  color: #f4f5f7;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 0 18px -4px rgba(125, 163, 192, 0.42);
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.grok-gpu-btn:hover {
+  background: linear-gradient(180deg, rgba(125, 163, 192, 0.45) 0%, rgba(80, 116, 146, 0.55) 100%);
+  border-color: #dbe6f0;
+  color: #ffffff;
+}
+
+.rc-hw-cursor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  z-index: 25;
+  will-change: transform;
+  transition: transform 16ms linear;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 8px rgba(125, 163, 192, 0.55));
+}
+
+/* Dropzone highlight when dragging over peer or screen */
+.drop-active {
+  border-color: var(--accent) !important;
+  background: rgba(125, 163, 192, 0.08) !important;
+  transform: scale(1.03);
+}
+
+/* Circular Progress SVG Ring */
+.progress-ring-circle {
+  transition: stroke-dashoffset 0.12s linear;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+
+/* ============================================================================
+   SWIFTDROP V19: GROK SPOTLIGHT DISPLAY WORDMARK, NASA EARTH & LIGHTNING THEME
+   ============================================================================ */
+@font-face {
+  font-family: 'SwiftDropDisplay';
+  src: url('./assets/space-grotesk-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+.grok-nav-brand {
+  font-family: 'SwiftDropDisplay', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: -0.025em;
+}
+
+.hero-wordmark-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 0.1rem;
+  pointer-events: none;
+  user-select: none;
+}
+
+.grok-wordmark-stage {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 1.75rem;
+}
+
+.grok-wordmark-beam {
+  position: absolute;
+  inset: -115% -65%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(ellipse 46% 52% at 74% 50%, rgba(206, 230, 255, 0.34) 0%, rgba(124, 174, 238, 0.14) 26%, rgba(64, 108, 176, 0.03) 44%, transparent 60%);
+  filter: blur(22px);
+}
+
+.grok-wordmark-text {
+  position: relative;
+  z-index: 1;
+  font-family: 'SwiftDropDisplay', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: clamp(2.85rem, 8.2vw, 4.75rem);
+  line-height: 1.04;
+  letter-spacing: -0.042em;
+  background: linear-gradient(96deg, rgba(168, 178, 198, 0.28) 0%, rgba(204, 214, 232, 0.58) 32%, rgba(236, 242, 252, 0.90) 64%, #ffffff 86%, #ffffff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 18px rgba(178, 216, 255, 0.24)) drop-shadow(10px 0 26px rgba(138, 194, 255, 0.32));
+}
+
+html[data-theme="light"] .grok-wordmark-beam {
+  background: radial-gradient(ellipse 46% 52% at 74% 50%, rgba(42, 134, 236, 0.14) 0%, rgba(125, 163, 192, 0.06) 28%, transparent 58%);
+}
+
+html[data-theme="light"] .grok-wordmark-text {
+  background: linear-gradient(96deg, rgba(71, 85, 105, 0.44) 0%, rgba(30, 41, 59, 0.80) 36%, #0f172a 72%, #020617 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 6px 18px rgba(15, 23, 42, 0.14));
+}
+
+.earth-horizon-wrap {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: min(46vh, 410px);
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+#recent-peers-box > div:first-child {
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: rgba(8, 9, 11, 0.64);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+html[data-theme="light"] #recent-peers-box > div:first-child {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  box-shadow: 0 2px 10px -2px rgba(15, 23, 42, 0.09);
+}
+
+footer > div:first-child,
+footer > p {
+  padding: 3px 12px;
+  border-radius: 9999px;
+  background: rgba(8, 9, 11, 0.56);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+html[data-theme="light"] footer > div:first-child,
+html[data-theme="light"] footer > p {
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(15, 23, 42, 0.09);
+  box-shadow: 0 2px 10px -2px rgba(15, 23, 42, 0.08);
+}
+
+.theme-choice-btn {
+  border: 1px solid var(--line);
+  background: rgba(16, 18, 22, 0.72);
+  color: var(--muted);
+  transition: all 0.2s ease;
+}
+
+.theme-choice-btn.is-active {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+  color: var(--fg);
+  box-shadow: 0 0 18px -6px rgba(125, 163, 192, 0.45);
+}
+
+html[data-theme="light"] .grok-atmosphere {
+  background:
+    radial-gradient(ellipse 90% 58% at 50% 105%, rgba(42, 95, 138, 0.16) 0%, rgba(125, 163, 192, 0.06) 46%, transparent 76%),
+    radial-gradient(ellipse 75% 50% at 85% 4%, rgba(255, 255, 255, 0.92), rgba(226, 234, 244, 0.35) 55%, transparent 78%),
+    radial-gradient(ellipse 65% 45% at 12% 18%, rgba(125, 163, 192, 0.12), transparent 68%);
+}
+
+html[data-theme="light"] .grok-grid {
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.045) 1px, transparent 1px);
+}
+
+html[data-theme="light"] .radar-ring {
+  border-color: rgba(15, 23, 42, 0.075);
+}
+
+html[data-theme="light"] .radar-sweep {
+  background: conic-gradient(from 0deg, transparent 275deg, rgba(42, 95, 138, 0.14) 335deg, rgba(15, 23, 42, 0.08) 360deg);
+}
+
+html[data-theme="light"] .radar-pulse {
+  border-color: rgba(42, 95, 138, 0.28);
+}
+
+html[data-theme="light"] .grok-title-gradient {
+  background: linear-gradient(135deg, #0d131c 0%, #24405c 58%, #2a5f8a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+html[data-theme="light"] :is(header, main, footer, #toast-container, #transfers-drawer, #qr-modal, #text-modal, #received-text-modal, #settings-modal, #consent-modal, #pin-challenge-modal) .text-white,
+html[data-theme="light"] :is(header, main, footer, #toast-container, #transfers-drawer, #qr-modal, #text-modal, #received-text-modal, #settings-modal, #consent-modal, #pin-challenge-modal) .text-zinc-100 {
+  color: #0d131c;
+}
+
+html[data-theme="light"] .clevante-eyebrow {
+  color: #475569;
+}
+
+html[data-theme="light"] .clevante-accent-text {
+  color: #2a5f8a;
+}
+
+html[data-theme="light"] .min-surface {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(244, 247, 252, 0.94) 100%);
+  border-color: rgba(15, 23, 42, 0.11);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 18px 40px -14px rgba(15, 23, 42, 0.14);
+}
+
+html[data-theme="light"] .min-button {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(15, 23, 42, 0.11);
+  color: #1e293b;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 4px 12px -4px rgba(15, 23, 42, 0.08);
+}
+
+html[data-theme="light"] .min-button:hover {
+  background: #ffffff;
+  border-color: rgba(42, 95, 138, 0.45);
+  color: #0d131c;
+  box-shadow: 0 8px 20px -6px rgba(42, 95, 138, 0.22);
+}
+
+html[data-theme="light"] .grok-neon-pill {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(241, 245, 251, 0.94) 100%);
+  border-color: rgba(15, 23, 42, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 6px 18px -8px rgba(15, 23, 42, 0.14);
+}
+
+html[data-theme="light"] .theme-choice-btn {
+  background: rgba(241, 245, 249, 0.92);
+  border-color: rgba(15, 23, 42, 0.12);
+  color: #475569;
+}
+
+html[data-theme="light"] .theme-choice-btn.is-active {
+  background: rgba(42, 95, 138, 0.14);
+  border-color: #2a5f8a;
+  color: #0d131c;
+}

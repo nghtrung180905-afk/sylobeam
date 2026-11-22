@@ -1,0 +1,23 @@
+# Build & Deploy Output
+_dist/
+.wrangler/
+swiftdrop-edge-vn/.wrangler/
+
+# Dependencies
+node_modules/
+desktop-app/node_modules/
+
+# Legacy & Large Compiled Binaries (Attach installers to GitHub Releases instead)
+SwiftDrop.exe
+SwiftDrop-Setup.exe
+SwiftDrop-Windows.zip
+SyloBeam.exe
+SyloBeam-Setup.exe
+SyloBeam-Windows.zip
+desktop-app/SwiftDropCapture.exe
+
+# Logs & OS Artifacts
+*.log
+.DS_Store
+Thumbs.db
+host-info.json

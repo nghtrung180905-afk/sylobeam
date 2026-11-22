@@ -1,0 +1,19 @@
+{
+  "name": "SyloBeam — Truyền File & Điều Khiển PC P2P",
+  "short_name": "SyloBeam",
+  "description": "Gửi ảnh gốc, video, tệp tốc độ cao và điều khiển máy tính trực tiếp 60Hz qua Wi-Fi & 4G/5G. Bảo mật đầu-cuối, không lưu qua máy chủ.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#030305",
+  "theme_color": "#030305",
+  "icons": [
+    {
+      "src": "./assets/logo.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

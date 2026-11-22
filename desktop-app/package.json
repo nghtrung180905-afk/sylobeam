@@ -1,0 +1,12 @@
+{
+  "name": "swiftdrop-desktop",
+  "version": "1.0.0",
+  "description": "SwiftDrop P2P Desktop Host — High-Speed File Transfer, Low-Latency Screen Share & Remote Control",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "electron": "^35.1.5"
+  }
+}

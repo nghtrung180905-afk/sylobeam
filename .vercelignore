@@ -1,0 +1,14 @@
+server.ps1
+tunnel-daemon.ps1
+host-info.json
+.github
+README.md
+node_modules
+package.json
+package-lock.json
+tailwind.input.css
+swiftdrop-edge-vn
+desktop-app
+start-desktop.bat
+_dist
+_headers
