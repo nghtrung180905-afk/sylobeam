@@ -237,6 +237,9 @@
       rc_title_hide_keys: 'Ẩn/hiện thanh phím & chuột',
       rc_hint_1: 'Vuốt để di chuột • Bật màn hình PC để chạm, vuốt & phóng to 60Hz',
       rc_hint_2: '1 ngón: Di chuột / Chạm • 2 ngón: Phóng to / Cuộn / Chuột phải',
+      rc_pc_hint_1: 'Di chuột trực tiếp • Bật màn hình PC để điều khiển không cần nhấn giữ',
+      rc_pc_hint_2: 'Click trái/giữa/phải, cuộn chuột & gõ bàn phím trực tiếp (hỗ trợ tiếng Việt & phím tắt)',
+      rc_pc_badge: 'PC ↔ PC Trực tiếp',
       rc_view_screen: 'Xem màn hình PC (60Hz Siêu mượt)',
       rc_stop: 'Tắt',
       rc_exit_fs: '✕ Thoát toàn màn hình',
@@ -362,6 +365,9 @@
       rc_title_hide_keys: 'Show/hide keyboard & mouse bar',
       rc_hint_1: 'Swipe to move cursor • Enable PC screen for 60Hz touch, swipe & zoom',
       rc_hint_2: '1 finger: Move / Tap • 2 fingers: Pinch Zoom / Scroll / Right Click',
+      rc_pc_hint_1: 'Move mouse directly • Enable PC screen for native hover control without click-hold',
+      rc_pc_hint_2: 'Left/middle/right click, wheel scroll & type straight from your PC keyboard',
+      rc_pc_badge: 'PC ↔ PC Native',
       rc_view_screen: 'View PC Screen (Smooth 60Hz)',
       rc_stop: 'Stop',
       rc_exit_fs: '✕ Exit Fullscreen',
@@ -648,6 +654,7 @@
     rcVideoTransformLayer: document.getElementById('rc-video-transform-layer'),
     rcTouchOverlay: document.getElementById('rc-touch-overlay'),
     rcTouchDot: document.getElementById('rc-touch-dot'),
+    rcDesktopImeTrap: document.getElementById('rc-desktop-ime-trap'),
     rcHardwareCursor: document.getElementById('rc-hardware-cursor'),
     rcControlsDock: document.getElementById('rc-controls-dock'),
     rcBtnLeftClick: document.getElementById('rc-btn-left-click'),
@@ -659,6 +666,8 @@
     rcScreenCanvas: document.getElementById('rc-screen-canvas'),
     rcScreenVideo: document.getElementById('rc-screen-video'),
     rcScreenPlaceholder: document.getElementById('rc-screen-placeholder'),
+    rcHint1: document.getElementById('rc-hint-1'),
+    rcHint2: document.getElementById('rc-hint-2'),
     rcLiveScreenHud: document.getElementById('rc-live-screen-hud'),
     rcZoomResetBtn: document.getElementById('rc-zoom-reset-btn'),
     rcBtnGpuBoost: document.getElementById('rc-btn-gpu-boost'),
@@ -4493,13 +4502,53 @@
     syncRcControlPillsUI();
   }
 
+  function focusDesktopImeTrap() {
+    if (!isDesktopPcController() || !dom.rcDesktopImeTrap) return;
+    if (!dom.remoteControlModal || dom.remoteControlModal.classList.contains('hidden')) return;
+    try {
+      dom.rcDesktopImeTrap.focus({ preventScroll: true });
+    } catch {
+      try {
+        dom.rcDesktopImeTrap.focus();
+      } catch {}
+    }
+  }
+
+  function isPcRemoteModalActive() {
+    if (!isDesktopPcController()) return false;
+    if (!dom.remoteControlModal || dom.remoteControlModal.classList.contains('hidden')) return false;
+    const blockers = [
+      dom.consentModal,
+      dom.pinChallengeModal,
+      dom.settingsModal,
+      dom.textModal,
+      dom.receivedTextModal,
+      dom.qrModal
+    ];
+    for (let i = 0; i < blockers.length; i += 1) {
+      if (blockers[i] && !blockers[i].classList.contains('hidden')) return false;
+    }
+    return true;
+  }
+
   function syncRcControlPillsUI() {
+    const pcMode = isDesktopPcController();
+    if (pcMode) {
+      state.rcTouchMode = 'direct';
+      state.rcSwipeDragMode = false;
+      state.rcDragActive = false;
+    }
     if (dom.rcTouchModeBtn) {
-      const isDirect = state.rcTouchMode === 'direct';
-      dom.rcTouchModeBtn.textContent = isDirect ? 'Cảm ứng' : 'Trackpad';
-      dom.rcTouchModeBtn.className = isDirect
-        ? 'min-button px-2.5 py-1 rounded-full text-[11px] font-medium text-emerald-300 border-emerald-500/35 whitespace-nowrap'
-        : 'min-button px-2.5 py-1 rounded-full text-[11px] font-medium text-zinc-200 whitespace-nowrap';
+      if (pcMode) {
+        dom.rcTouchModeBtn.classList.add('hidden');
+      } else {
+        dom.rcTouchModeBtn.classList.remove('hidden');
+        const isDirect = state.rcTouchMode === 'direct';
+        dom.rcTouchModeBtn.textContent = isDirect ? 'Cảm ứng' : 'Trackpad';
+        dom.rcTouchModeBtn.className = isDirect
+          ? 'min-button px-2.5 py-1 rounded-full text-[11px] font-medium text-emerald-300 border-emerald-500/35 whitespace-nowrap'
+          : 'min-button px-2.5 py-1 rounded-full text-[11px] font-medium text-zinc-200 whitespace-nowrap';
+      }
     }
     if (dom.rcQualityBtn) {
       dom.rcQualityBtn.textContent = getQualityPreset(state.rcScreenQuality).label;
@@ -4514,16 +4563,41 @@
       }
     }
     if (dom.rcFsSwipeBtn) {
-      dom.rcFsSwipeBtn.textContent = state.rcSwipeDragMode ? 'Kéo thả' : 'Di chuột';
-      dom.rcFsSwipeBtn.className = state.rcSwipeDragMode
-        ? 'px-3 py-2 rounded-full bg-amber-500/25 border border-amber-400/50 text-[11px] font-semibold text-amber-200 backdrop-blur-md shadow-xl active:scale-95 transition'
-        : 'px-3 py-2 rounded-full bg-black/75 border border-zinc-700/80 text-[11px] font-medium text-emerald-300 backdrop-blur-md shadow-xl active:scale-95 transition';
+      if (pcMode) {
+        dom.rcFsSwipeBtn.classList.add('hidden');
+      } else {
+        dom.rcFsSwipeBtn.classList.remove('hidden');
+        dom.rcFsSwipeBtn.textContent = state.rcSwipeDragMode ? 'Kéo thả' : 'Di chuột';
+        dom.rcFsSwipeBtn.className = state.rcSwipeDragMode
+          ? 'px-3 py-2 rounded-full bg-amber-500/25 border border-amber-400/50 text-[11px] font-semibold text-amber-200 backdrop-blur-md shadow-xl active:scale-95 transition'
+          : 'px-3 py-2 rounded-full bg-black/75 border border-zinc-700/80 text-[11px] font-medium text-emerald-300 backdrop-blur-md shadow-xl active:scale-95 transition';
+      }
     }
     if (dom.rcToggleControlsBtn) {
-      dom.rcToggleControlsBtn.textContent = state.rcControlsCollapsed ? 'Hiện phím' : 'Ẩn phím';
+      if (pcMode) {
+        dom.rcToggleControlsBtn.classList.add('hidden');
+        dom.rcToggleControlsBtn.classList.remove('sm:inline-flex');
+      } else {
+        dom.rcToggleControlsBtn.classList.remove('hidden');
+        dom.rcToggleControlsBtn.classList.add('sm:inline-flex');
+        dom.rcToggleControlsBtn.textContent = state.rcControlsCollapsed ? 'Hiện phím' : 'Ẩn phím';
+      }
     }
     if (dom.rcControlsDock) {
-      dom.rcControlsDock.classList.toggle('hidden', state.rcControlsCollapsed || state.rcFullscreen);
+      const hideDock = pcMode || state.rcControlsCollapsed || state.rcFullscreen;
+      dom.rcControlsDock.classList.toggle('hidden', hideDock);
+      dom.rcControlsDock.classList.toggle('flex', !hideDock);
+    }
+    if (dom.rcTouchOverlay) {
+      dom.rcTouchOverlay.classList.toggle('rc-pc-mode', pcMode);
+    }
+    if (dom.rcHint1 && dom.rcHint2) {
+      const k1 = pcMode ? 'rc_pc_hint_1' : 'rc_hint_1';
+      const k2 = pcMode ? 'rc_pc_hint_2' : 'rc_hint_2';
+      dom.rcHint1.setAttribute('data-i18n', k1);
+      dom.rcHint2.setAttribute('data-i18n', k2);
+      dom.rcHint1.textContent = t(k1);
+      dom.rcHint2.textContent = t(k2);
     }
   }
 
@@ -4565,7 +4639,9 @@
       dom.rcTopHeader.classList.toggle('hidden', state.rcFullscreen);
     }
     if (dom.rcControlsDock) {
-      dom.rcControlsDock.classList.toggle('hidden', state.rcFullscreen || state.rcControlsCollapsed);
+      const hideDock = isDesktopPcController() || state.rcFullscreen || state.rcControlsCollapsed;
+      dom.rcControlsDock.classList.toggle('hidden', hideDock);
+      dom.rcControlsDock.classList.toggle('flex', !hideDock);
     }
     if (dom.rcFsExitDock) {
       dom.rcFsExitDock.classList.toggle('hidden', !state.rcFullscreen);
@@ -4602,6 +4678,7 @@
     }
     applyRemoteZoomTransform();
     syncRcControlPillsUI();
+    focusDesktopImeTrap();
   }
 
   function stopRemoteScreenPlayback() {
@@ -4688,6 +4765,14 @@
     }
     dom.remoteControlModal.classList.remove('hidden');
     dom.remoteControlModal.classList.add('flex');
+    if (isDesktopPcController()) {
+      state.rcTouchMode = 'direct';
+      state.rcSwipeDragMode = false;
+      syncRcControlPillsUI();
+      if (dom.rcDesktopImeTrap) dom.rcDesktopImeTrap.value = '';
+      focusDesktopImeTrap();
+      requestAnimationFrame(focusDesktopImeTrap);
+    }
     if (typeof scheduleEarthFrame === 'function') scheduleEarthFrame();
   }
 
@@ -4700,6 +4785,12 @@
       state.rcDragActive = false;
       sendRemoteControlCmd({ action: 'mouse_up', button: 'left' });
       if (dom.rcBtnDragToggle) dom.rcBtnDragToggle.textContent = 'Giữ kéo: TẮT';
+    }
+    if (dom.rcDesktopImeTrap) {
+      try {
+        dom.rcDesktopImeTrap.value = '';
+        dom.rcDesktopImeTrap.blur();
+      } catch {}
     }
     if (dom.remoteControlModal) {
       dom.remoteControlModal.classList.add('hidden');
@@ -4852,6 +4943,7 @@
           } catch {}
         }
         showToast(`Chất lượng màn hình: ${preset.label}`, 'info');
+        focusDesktopImeTrap();
       });
     }
 
@@ -4914,6 +5006,7 @@
           state.activeConn.send({ type: 'rc-screen-request', quality: state.rcScreenQuality });
           showToast(`Đang yêu cầu phát màn hình PC (${getQualityPreset(state.rcScreenQuality).label})...`, 'info');
         }
+        focusDesktopImeTrap();
       });
     }
     if (dom.rcBtnGpuBoost) {
@@ -4922,6 +5015,7 @@
           state.activeConn.send({ type: 'rc-request-gpu-60hz', quality: state.rcScreenQuality });
           showToast('Đã gửi yêu cầu kích hoạt GPU 60Hz H.264 lên màn hình PC...', 'info');
         }
+        focusDesktopImeTrap();
       });
     }
     if (dom.rcBtnStopScreen) {
@@ -4932,6 +5026,7 @@
             state.activeConn.send({ type: 'rc-screen-stop' });
           } catch {}
         }
+        focusDesktopImeTrap();
       });
     }
 
@@ -5254,33 +5349,108 @@
         maxTouchCount = 0;
       });
 
-      // Desktop Mouse Support (Hover/Drag/Click/Wheel on Viewport)
+      // Desktop Mouse Support (Native PC-to-PC hover/drag/3-button click/wheel + Mobile fallback)
       let mouseDown = false;
+      let activeMouseButton = 'left';
       let lastMouseX = 0;
       let lastMouseY = 0;
       let mouseMoved = 0;
+      let hasHoverPos = false;
+      let lastHoverX = 0;
+      let lastHoverY = 0;
+      let lastHoverNx = -1;
+      let lastHoverNy = -1;
+
+      const getMouseBtnName = (btn) => {
+        if (btn === 2) return 'right';
+        if (btn === 1) return 'middle';
+        return 'left';
+      };
 
       surface.addEventListener('mousedown', (e) => {
+        const pcMode = isDesktopPcController();
+        if (pcMode && e.button !== 0 && e.button !== 1 && e.button !== 2) return;
+        if (pcMode) {
+          e.preventDefault();
+          focusDesktopImeTrap();
+        }
         mouseDown = true;
+        activeMouseButton = pcMode ? getMouseBtnName(e.button) : (e.button === 2 ? 'right' : 'left');
         lastMouseX = e.clientX;
         lastMouseY = e.clientY;
+        lastHoverX = e.clientX;
+        lastHoverY = e.clientY;
+        hasHoverPos = true;
         mouseMoved = 0;
+        if (pcMode) {
+          const c = getNormalizedVideoCoords(e.clientX, e.clientY);
+          if (c) {
+            sendRemoteControlCmd({ action: 'mouse_abs', nx: c.nx, ny: c.ny, down: true, button: activeMouseButton });
+          } else {
+            sendRemoteControlCmd({ action: 'mouse_down', button: activeMouseButton });
+          }
+          return;
+        }
         if (isDirectScreenMode()) {
           const c = getNormalizedVideoCoords(e.clientX, e.clientY);
           if (c) {
-            sendRemoteControlCmd({ action: 'mouse_abs', nx: c.nx, ny: c.ny, down: true, button: e.button === 2 ? 'right' : 'left' });
+            sendRemoteControlCmd({ action: 'mouse_abs', nx: c.nx, ny: c.ny, down: true, button: activeMouseButton });
             showTouchDot(e.clientX, e.clientY, true);
           }
         }
       });
 
+      // PC-to-PC native cursor tracking on hover without holding any mouse button
+      surface.addEventListener('mousemove', (e) => {
+        if (!isDesktopPcController() || mouseDown || !isPcRemoteModalActive()) return;
+        const dx = hasHoverPos ? e.clientX - lastHoverX : 0;
+        const dy = hasHoverPos ? e.clientY - lastHoverY : 0;
+        lastHoverX = e.clientX;
+        lastHoverY = e.clientY;
+        hasHoverPos = true;
+        if (state.rcVideoActive) {
+          const c = getNormalizedVideoCoords(e.clientX, e.clientY);
+          if (c && (Math.abs(c.nx - lastHoverNx) > 0.0004 || Math.abs(c.ny - lastHoverNy) > 0.0004)) {
+            lastHoverNx = c.nx;
+            lastHoverNy = c.ny;
+            pendingAbs = c;
+            queueFlush();
+          }
+        } else if (dx !== 0 || dy !== 0) {
+          pendingDx += dx * 1.4;
+          pendingDy += dy * 1.4;
+          queueFlush();
+        }
+      });
+
+      surface.addEventListener('mouseleave', () => {
+        hasHoverPos = false;
+      });
+
       window.addEventListener('mousemove', (e) => {
         if (!mouseDown) return;
+        const pcMode = isDesktopPcController();
         const dx = e.clientX - lastMouseX;
         const dy = e.clientY - lastMouseY;
         lastMouseX = e.clientX;
         lastMouseY = e.clientY;
+        lastHoverX = e.clientX;
+        lastHoverY = e.clientY;
         mouseMoved += Math.hypot(dx, dy);
+        if (pcMode) {
+          if (state.rcVideoActive) {
+            const c = getNormalizedVideoCoords(e.clientX, e.clientY);
+            if (c) {
+              pendingAbs = c;
+              queueFlush();
+            }
+          } else {
+            pendingDx += dx * 1.4;
+            pendingDy += dy * 1.4;
+            queueFlush();
+          }
+          return;
+        }
         if (isDirectScreenMode()) {
           const c = getNormalizedVideoCoords(e.clientX, e.clientY);
           if (c) {
@@ -5297,28 +5467,217 @@
 
       window.addEventListener('mouseup', (e) => {
         if (!mouseDown) return;
+        const pcMode = isDesktopPcController();
+        const btn = pcMode ? activeMouseButton : (e.button === 2 ? 'right' : 'left');
         mouseDown = false;
+        activeMouseButton = 'left';
         hideTouchDot();
+        if (pcMode) {
+          const c = getNormalizedVideoCoords(e.clientX, e.clientY);
+          if (c) {
+            sendRemoteControlCmd({ action: 'mouse_abs', nx: c.nx, ny: c.ny, up: true, button: btn });
+          } else {
+            sendRemoteControlCmd({ action: 'mouse_up', button: btn });
+          }
+          return;
+        }
         if (isDirectScreenMode()) {
           const c = getNormalizedVideoCoords(e.clientX, e.clientY);
           if (c) {
-            sendRemoteControlCmd({ action: 'mouse_abs', nx: c.nx, ny: c.ny, up: true, button: e.button === 2 ? 'right' : 'left' });
+            sendRemoteControlCmd({ action: 'mouse_abs', nx: c.nx, ny: c.ny, up: true, button: btn });
           } else {
-            sendRemoteControlCmd({ action: 'mouse_up', button: e.button === 2 ? 'right' : 'left' });
+            sendRemoteControlCmd({ action: 'mouse_up', button: btn });
           }
         } else if (mouseMoved < 8) {
-          sendRemoteControlCmd({ action: 'mouse_click', button: e.button === 2 ? 'right' : 'left', count: 1 });
+          sendRemoteControlCmd({ action: 'mouse_click', button: btn, count: 1 });
         }
+      });
+
+      window.addEventListener('blur', () => {
+        if (!mouseDown) return;
+        const btn = activeMouseButton || 'left';
+        mouseDown = false;
+        activeMouseButton = 'left';
+        hasHoverPos = false;
+        hideTouchDot();
+        sendRemoteControlCmd({ action: 'mouse_up', button: btn });
       });
 
       surface.addEventListener('wheel', (e) => {
         e.preventDefault();
         pendingScrollY += -e.deltaY * 1.2;
+        if (e.deltaX) {
+          pendingScrollX += e.deltaX * 1.2;
+        }
         queueFlush();
       }, { passive: false });
 
       surface.addEventListener('contextmenu', (e) => e.preventDefault());
     }
+
+    bindPcNativeKeyboardController();
+  }
+
+  function mapBrowserKeyToRcKey(e) {
+    const k = e.key || '';
+    const kl = k.toLowerCase();
+    if (kl === 'enter') return 'enter';
+    if (kl === 'backspace') return 'backspace';
+    if (kl === 'tab') return 'tab';
+    if (kl === 'escape' || kl === 'esc') return 'escape';
+    if (kl === ' ' || kl === 'spacebar') return 'space';
+    if (kl === 'arrowup') return 'up';
+    if (kl === 'arrowdown') return 'down';
+    if (kl === 'arrowleft') return 'left';
+    if (kl === 'arrowright') return 'right';
+    if (kl === 'delete' || kl === 'del') return 'delete';
+    if (kl === 'insert') return 'insert';
+    if (kl === 'home') return 'home';
+    if (kl === 'end') return 'end';
+    if (kl === 'pageup') return 'pageup';
+    if (kl === 'pagedown') return 'pagedown';
+    if (kl === 'capslock') return 'capslock';
+    if (kl === 'printscreen') return 'printscreen';
+    if (/^f([1-9]|1[0-2])$/.test(kl)) return kl;
+    if (k.length === 1 && !/[\u0080-\uFFFF]/.test(k)) {
+      return k.toLowerCase();
+    }
+    const code = e.code || '';
+    if (/^Key([A-Z])$/.test(code)) return code.slice(3).toLowerCase();
+    if (/^Digit([0-9])$/.test(code)) return code.slice(5);
+    return '';
+  }
+
+  function bindPcNativeKeyboardController() {
+    const trap = dom.rcDesktopImeTrap;
+    let imeComposing = false;
+
+    const SPECIAL_KEYS = new Set([
+      'enter', 'tab', 'escape', 'backspace', 'delete', 'insert',
+      'home', 'end', 'pageup', 'pagedown', 'up', 'down', 'left', 'right',
+      'capslock', 'printscreen',
+      'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f10', 'f11', 'f12'
+    ]);
+
+    if (trap) {
+      trap.addEventListener('compositionstart', () => {
+        if (!isPcRemoteModalActive()) return;
+        imeComposing = true;
+      });
+
+      trap.addEventListener('compositionend', (e) => {
+        imeComposing = false;
+        if (!isPcRemoteModalActive()) {
+          trap.value = '';
+          return;
+        }
+        const committed = typeof e.data === 'string' ? e.data : '';
+        if (committed) {
+          sendRemoteControlCmd({ action: 'key_text', text: committed });
+        }
+        trap.value = '';
+      });
+
+      trap.addEventListener('input', (e) => {
+        if (!isPcRemoteModalActive()) {
+          trap.value = '';
+          return;
+        }
+        const it = e.inputType || '';
+        if (imeComposing || e.isComposing || it === 'insertCompositionText' || it === 'insertFromComposition') {
+          return;
+        }
+        if (it.startsWith('delete')) {
+          return;
+        }
+        let text = typeof e.data === 'string' ? e.data : '';
+        if (!text && it === 'insertFromPaste') {
+          text = trap.value || '';
+        }
+        if (text) {
+          sendRemoteControlCmd({ action: 'key_text', text });
+        }
+        if (trap.value.length > 80) {
+          trap.value = trap.value.slice(-16);
+        }
+      });
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (!isPcRemoteModalActive()) return;
+      const target = e.target;
+      if (target && target !== trap && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) {
+        return;
+      }
+
+      // Let OS / macOS / Telex IME handle composing strokes via trap compositionend
+      if (e.isComposing || imeComposing || e.key === 'Process' || e.key === 'Dead' || e.keyCode === 229) {
+        focusDesktopImeTrap();
+        return;
+      }
+
+      const keyName = e.key || '';
+      if (keyName === 'Control' || keyName === 'Shift' || keyName === 'Alt' || keyName === 'Meta' || keyName === 'AltGraph') {
+        return;
+      }
+
+      // Yield Ctrl+Alt+Escape if this window is also Desktop Host emergency hotkey
+      if (IS_DESKTOP_APP && e.ctrlKey && e.altKey && keyName === 'Escape') {
+        return;
+      }
+
+      const mapped = mapBrowserKeyToRcKey(e);
+
+      // 1. Modifier combinations (Ctrl / Alt / Win+Meta)
+      if (e.ctrlKey || e.altKey || e.metaKey) {
+        if (!mapped) return;
+        e.preventDefault();
+        e.stopPropagation();
+        const mods = [];
+        if (e.ctrlKey) mods.push('ctrl');
+        if (e.altKey) mods.push('alt');
+        if (e.shiftKey) mods.push('shift');
+        if (e.metaKey) mods.push('win');
+        sendRemoteControlCmd({ action: 'key_combo', keys: mods.concat([mapped]) });
+        return;
+      }
+
+      // 2. Shift + special navigation/function key (Shift+Arrows, Shift+Tab, Shift+Home, Shift+F10...)
+      if (e.shiftKey && mapped && (SPECIAL_KEYS.has(mapped) || mapped === 'space')) {
+        e.preventDefault();
+        sendRemoteControlCmd({ action: 'key_combo', keys: ['shift', mapped] });
+        if (trap && mapped === 'space') trap.value = '';
+        return;
+      }
+
+      // 3. Spacebar outside IME composition (supports Play/Pause + text spacing)
+      if (mapped === 'space' && !e.shiftKey) {
+        e.preventDefault();
+        sendRemoteControlCmd({ action: 'key_press', key: 'space' });
+        if (trap) trap.value = '';
+        return;
+      }
+
+      // 4. Special / Navigation / Function keys (Enter, Tab, Escape, Arrows, F1-F12...)
+      if (mapped && SPECIAL_KEYS.has(mapped)) {
+        if (mapped === 'escape' && document.fullscreenElement) {
+          // Let browser handle fullscreen exit cleanly via fullscreenchange
+          return;
+        }
+        // Keep Backspace flowing into trap naturally so Windows Unikey/EVKey can delete locally while forwarding VK_BACK
+        if (mapped !== 'backspace') {
+          e.preventDefault();
+        }
+        sendRemoteControlCmd({ action: 'key_press', key: mapped });
+        if (trap && mapped === 'enter') trap.value = '';
+        return;
+      }
+
+      // 5. All printable keys (English, numbers, symbols, Unikey VK_PACKET) go cleanly through focused trap input/composition
+      if (trap && document.activeElement !== trap) {
+        focusDesktopImeTrap();
+      }
+    }, true);
   }
 
   function handleIncomingTextMessage(packet) {
@@ -5590,9 +5949,22 @@
     return new Blob([...localParts, ...centralParts, eocd], { type: 'application/zip' });
   }
 
-  function isMobileDevice() {
+  function isTouchMobileOrTablet() {
     const dt = state.myProfile && state.myProfile.deviceType;
-    return dt === 'mobile' || dt === 'tablet' || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent || '');
+    if (dt === 'mobile' || dt === 'tablet') return true;
+    const ua = navigator.userAgent || '';
+    if (/iPhone|iPad|iPod|Android|Mobile|Tablet/i.test(ua)) return true;
+    // iPadOS 13+ Safari desktop mode reports Macintosh with multi-touch (>1 points)
+    if (/Macintosh/i.test(ua) && (navigator.maxTouchPoints || 0) > 1) return true;
+    return false;
+  }
+
+  function isDesktopPcController() {
+    return !isTouchMobileOrTablet();
+  }
+
+  function isMobileDevice() {
+    return isTouchMobileOrTablet();
   }
 
   function triggerBlobAnchorDownload(blob, fileName) {
@@ -6584,10 +6956,10 @@
       img.src = src;
     };
 
-    loadTex('earth', 0, texEarth, './assets/earth-blue-marble.jpg?v=21');
-    loadTex('clouds', 1, texClouds, './assets/earth-clouds.jpg?v=21');
-    loadTex('bump', 2, texBump, './assets/earth-topology.jpg?v=21');
-    loadTex('night', 3, texNight, './assets/earth-night.jpg?v=21');
+    loadTex('earth', 0, texEarth, './assets/earth-blue-marble.jpg?v=22');
+    loadTex('clouds', 1, texClouds, './assets/earth-clouds.jpg?v=22');
+    loadTex('bump', 2, texBump, './assets/earth-topology.jpg?v=22');
+    loadTex('night', 3, texNight, './assets/earth-night.jpg?v=22');
 
     earthEngine.mode = 'webgl';
     earthEngine.gl = gl;
@@ -7510,6 +7882,10 @@
     }
     updateTurnIndicatorUI();
     initDesktopHardwareTelemetry();
+    if (dom.btnDownloadWindowsApp && isTouchMobileOrTablet()) {
+      dom.btnDownloadWindowsApp.classList.add('hidden');
+      dom.btnDownloadWindowsApp.classList.remove('flex', 'inline-flex');
+    }
     renderRecentPeersUI();
     checkUrlAutoJoinParam();
     bindEventListeners();

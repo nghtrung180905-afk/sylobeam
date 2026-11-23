@@ -1,15 +1,15 @@
-const CACHE_NAME = 'sylobeam-p2p-v21';
+const CACHE_NAME = 'sylobeam-p2p-v22';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './styles.css?v=21',
-  './app.js?v=21',
-  './assets/logo.svg?v=21',
+  './styles.css?v=22',
+  './app.js?v=22',
+  './assets/logo.svg?v=22',
   './assets/space-grotesk-600.woff2',
-  './assets/earth-blue-marble.jpg?v=21',
-  './assets/earth-clouds.jpg?v=21',
-  './assets/earth-topology.jpg?v=21',
-  './assets/earth-night.jpg?v=21',
+  './assets/earth-blue-marble.jpg?v=22',
+  './assets/earth-clouds.jpg?v=22',
+  './assets/earth-topology.jpg?v=22',
+  './assets/earth-night.jpg?v=22',
   './vendor/peerjs.min.js',
   './vendor/qrcode.min.js',
   './manifest.json'

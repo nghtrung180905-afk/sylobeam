@@ -2,7 +2,7 @@
 <html lang="vi" class="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>SyloBeam — Chia Sẻ File &amp; Ảnh P2P Tốc Độ Cao</title>
   <meta name="description" content="Gửi ảnh gốc, video và tệp dung lượng lớn trực tiếp giữa các thiết bị qua Wi-Fi &amp; 4G/5G. Bảo mật mã hóa đầu-cuối, xác nhận hai chiều và kiểm tra toàn vẹn SHA-256 — không lưu qua máy chủ trung gian." />
   <meta property="og:type" content="website" />
@@ -19,15 +19,15 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="SyloBeam" />
   <link rel="manifest" href="./manifest.json" />
-  <link rel="icon" type="image/svg+xml" href="./assets/logo.svg?v=21" />
+  <link rel="icon" type="image/svg+xml" href="./assets/logo.svg?v=22" />
 
   <!-- Pre-compiled Self-Hosted Stylesheet (Zero external CDN blocking on 4G/5G) -->
-  <link rel="stylesheet" href="./styles.css?v=21" />
+  <link rel="stylesheet" href="./styles.css?v=22" />
 
   <!-- Self-Hosted WebRTC & QR Libraries (Zero unpkg/CDN timeout on 4G/5G) -->
   <script defer src="./vendor/peerjs.min.js"></script>
   <script defer src="./vendor/qrcode.min.js"></script>
-  <script defer src="./app.js?v=21"></script>
+  <script defer src="./app.js?v=22"></script>
 </head>
 <body class="min-h-screen flex flex-col justify-between select-none font-sans antialiased">
 
@@ -44,11 +44,11 @@
   <!-- ===================================================================== -->
   <!-- 1. ARCHITECTURAL STUDIO TOP BAR                                       -->
   <!-- ===================================================================== -->
-  <header class="relative z-30 w-full max-w-5xl mx-auto px-4 sm:px-5 pt-4 sm:pt-5 pb-2 flex flex-wrap items-center justify-between gap-y-2.5 gap-x-2">
+  <header class="sd-header relative z-30 w-full max-w-5xl mx-auto px-4 sm:px-5 pt-4 sm:pt-5 pb-2 flex flex-wrap items-center justify-between gap-y-2.5 gap-x-2">
     <!-- Left: Minimalist Monogram Logo + Studio Wordmark + Live Status -->
-    <div class="flex items-center gap-2.5 min-w-0 order-1">
+    <div class="sd-hdr-brand flex items-center gap-2.5 min-w-0 order-1">
       <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-zinc-950/90 border border-white/10 flex items-center justify-center shrink-0 overflow-hidden shadow-lg">
-        <img src="./assets/logo.svg?v=21" alt="SyloBeam Logo" class="w-full h-full object-cover" />
+        <img src="./assets/logo.svg?v=22" alt="SyloBeam Logo" class="w-full h-full object-cover" />
       </div>
       <div class="min-w-0">
         <div class="flex items-center gap-1.5 sm:gap-2 flex-nowrap">
@@ -64,7 +64,7 @@
     </div>
 
     <!-- Center: Minimalist Room Code Pill (Row 2 centered on mobile, Center on desktop) -->
-    <div class="order-3 w-full sm:order-2 sm:w-auto flex justify-center">
+    <div class="sd-hdr-room order-3 w-full sm:order-2 sm:w-auto flex justify-center">
       <div class="inline-flex items-center gap-1.5 min-surface rounded-full pl-3.5 pr-1.5 py-1">
         <span data-i18n="header_code" class="text-[11px] uppercase tracking-wider text-zinc-500 font-medium">Mã</span>
         <span id="my-room-id" class="font-mono text-xs sm:text-sm font-semibold tracking-[0.18em] text-white select-all px-1">------</span>
@@ -82,7 +82,7 @@
     </div>
 
     <!-- Right: Unified Top-Right Studio Actions (Tải App • Copy Link • Hiện QR • Cài App • Theme • Transfers • Settings) -->
-    <div class="flex flex-wrap items-center justify-end gap-1.5 sm:gap-2 order-2 sm:order-3 shrink-0">
+    <div class="sd-hdr-actions flex flex-wrap items-center justify-end gap-1.5 sm:gap-2 order-2 sm:order-3 max-w-full min-w-0">
       <!-- Download Windows App Installer -->
       <a id="btn-download-windows-app" href="./SyloBeam-Setup.exe" download="SyloBeam-Setup.exe" data-i18n-title="title_download_app" title="Tải bộ cài đặt SyloBeam cho Windows (.EXE)" class="min-button h-8 sm:h-9 px-2.5 sm:px-3 rounded-full text-xs font-semibold text-white hover:text-white flex items-center gap-1.5 shrink-0">
         <svg class="w-3.5 h-3.5 clevante-accent-text shrink-0" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
@@ -186,7 +186,7 @@
         <!-- Minimalist P2P Core Brand Node -->
         <div class="relative flex items-center justify-center">
           <div class="relative w-16 h-16 rounded-2xl bg-zinc-950/95 border border-white/15 flex items-center justify-center shadow-2xl overflow-hidden p-1">
-            <img src="./assets/logo.svg?v=21" alt="SyloBeam" class="w-full h-full object-contain" />
+            <img src="./assets/logo.svg?v=22" alt="SyloBeam" class="w-full h-full object-contain" />
           </div>
         </div>
 
@@ -593,29 +593,29 @@
   <!-- ===================================================================== -->
   <!-- 8. MODAL: STUN & TURN 4G NETWORK SETTINGS                             -->
   <!-- ===================================================================== -->
-  <div id="settings-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-    <div class="min-surface w-full max-w-lg rounded-3xl border border-zinc-800 shadow-2xl overflow-hidden">
-      <div class="px-6 py-4 border-b border-zinc-800/80 flex items-center justify-between">
-        <div>
+  <div id="settings-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
+    <div class="sd-settings-card min-surface w-full max-w-lg rounded-3xl border border-zinc-800 shadow-2xl overflow-hidden">
+      <div class="sd-settings-head px-4 sm:px-6 py-3.5 sm:py-4 border-b border-zinc-800/80 flex items-center justify-between gap-2">
+        <div class="min-w-0">
           <h3 data-i18n="settings_title" class="text-sm font-semibold text-white">Cài Đặt &amp; Mạng WebRTC (STUN / TURN 4G)</h3>
           <p data-i18n="settings_subtitle" class="text-[11px] text-zinc-400 mt-0.5">Đảm bảo gửi file thành công 100% qua mạng di động 4G/5G</p>
         </div>
-        <button id="btn-close-settings" type="button" class="p-1.5 rounded-full text-zinc-400 hover:text-white hover:bg-zinc-800 transition">
+        <button id="btn-close-settings" type="button" class="p-1.5 rounded-full text-zinc-400 hover:text-white hover:bg-zinc-800 transition shrink-0">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
 
-      <form id="turn-settings-form" class="p-6 space-y-4 max-h-[80vh] overflow-y-auto">
+      <form id="turn-settings-form" class="sd-settings-body p-4 sm:p-6 space-y-3.5 sm:space-y-4 max-h-[82vh] overflow-y-auto overflow-x-hidden">
         <!-- Language Selection (Tiếng Việt / English) -->
         <div class="p-3 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 text-xs space-y-2">
-          <div class="flex items-center justify-between gap-2">
-            <div>
+          <div class="sd-setting-row flex flex-wrap items-center justify-between gap-2">
+            <div class="min-w-0">
               <div data-i18n="settings_lang_title" class="font-semibold text-white">Ngôn ngữ</div>
               <div data-i18n="settings_lang_desc" class="text-[11px] text-zinc-500">Chuyển đổi ngôn ngữ hiển thị phần mềm</div>
             </div>
-            <div class="flex items-center gap-1.5 shrink-0">
+            <div class="sd-setting-choices flex items-center gap-1.5 shrink-0">
               <button id="btn-lang-vi" type="button" class="theme-choice-btn is-active px-3 py-1.5 rounded-full text-[11px] font-semibold">
                 Tiếng Việt
               </button>
@@ -628,12 +628,12 @@
 
         <!-- Theme Selection (Dark / Lightning Bright Mode) -->
         <div class="p-3 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 text-xs space-y-2">
-          <div class="flex items-center justify-between gap-2">
-            <div>
+          <div class="sd-setting-row flex flex-wrap items-center justify-between gap-2">
+            <div class="min-w-0">
               <div data-i18n="settings_theme_title" class="font-semibold text-white">Giao diện hiển thị</div>
               <div data-i18n="settings_theme_desc" class="text-[11px] text-zinc-500">Chuyển đổi nhanh giữa Dark và Lightning sáng</div>
             </div>
-            <div class="flex items-center gap-1.5 shrink-0">
+            <div class="sd-setting-choices flex items-center gap-1.5 shrink-0">
               <button id="btn-theme-dark" type="button" class="theme-choice-btn is-active px-3 py-1.5 rounded-full text-[11px] font-semibold flex items-center gap-1.5">
                 <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
@@ -655,11 +655,11 @@
         <div id="save-dir-section" class="p-3 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 text-xs space-y-2">
           <div class="flex items-center justify-between gap-2">
             <label for="save-dir-input" data-i18n="settings_savedir_title" class="font-semibold text-white">Thư mục lưu file nhận được</label>
-            <button id="btn-reset-save-dir" type="button" data-i18n="btn_default" class="text-[11px] clevante-accent-text hover:underline transition">
+            <button id="btn-reset-save-dir" type="button" data-i18n="btn_default" class="text-[11px] clevante-accent-text hover:underline transition shrink-0">
               Mặc định
             </button>
           </div>
-          <div class="flex items-center gap-2">
+          <div class="sd-save-dir-row flex items-center gap-2 min-w-0">
             <input
               id="save-dir-input"
               type="text"
@@ -667,7 +667,7 @@
               placeholder="Thư mục Downloads mặc định"
               autocomplete="off"
               spellcheck="false"
-              class="flex-1 bg-zinc-950 border border-zinc-800 focus:border-zinc-500 rounded-xl px-3 py-2 text-[11px] font-mono text-zinc-200 placeholder:text-zinc-600 outline-none"
+              class="flex-1 min-w-0 bg-zinc-950 border border-zinc-800 focus:border-zinc-500 rounded-xl px-3 py-2 text-[11px] font-mono text-zinc-200 placeholder:text-zinc-600 outline-none"
             />
             <button id="btn-choose-save-dir" type="button" class="min-button px-3 py-2 rounded-xl text-[11px] font-semibold text-white flex items-center gap-1.5 shrink-0">
               <svg class="w-3.5 h-3.5 clevante-accent-text shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
@@ -681,17 +681,17 @@
 
         <div class="p-3 rounded-2xl bg-zinc-950/90 border border-zinc-800/80 text-xs space-y-1">
           <div data-i18n="settings_stun_title" class="font-medium text-zinc-200">STUN Server mặc định (Luôn bật):</div>
-          <p class="font-mono text-[11px] text-zinc-500">
+          <p class="sd-stun-urls font-mono text-[11px] text-zinc-500">
             stun:stun.l.google.com:19302, stun:stun1.l.google.com:19302, stun:stun.cloudflare.com:3478
           </p>
         </div>
 
-        <div class="flex items-center justify-between pt-1">
-          <div>
+        <div class="flex items-center justify-between gap-3 pt-1">
+          <div class="min-w-0">
             <label for="turn-enabled" data-i18n="settings_turn_enable" class="text-xs font-semibold text-white">Kích hoạt TURN Server (Open Relay / Metered / Cloudflare)</label>
             <p data-i18n="settings_turn_desc" class="text-[11px] text-zinc-500">Dùng khi 2 máy khác Wi-Fi hoặc dùng mạng 4G/5G Symmetric NAT</p>
           </div>
-          <input id="turn-enabled" type="checkbox" class="w-4 h-4 rounded bg-zinc-900 border-zinc-700 text-white focus:ring-0 cursor-pointer" />
+          <input id="turn-enabled" type="checkbox" class="w-4 h-4 rounded bg-zinc-900 border-zinc-700 text-white focus:ring-0 cursor-pointer shrink-0" />
         </div>
 
         <div class="space-y-3">
@@ -762,7 +762,7 @@
           </div>
         </div>
 
-        <div class="pt-3 border-t border-zinc-800/80 flex items-center justify-between gap-2">
+        <div class="pt-3 border-t border-zinc-800/80 flex flex-wrap items-center justify-between gap-2">
           <button id="btn-reset-turn" type="button" data-i18n="btn_reset_default" class="text-xs text-zinc-500 hover:text-zinc-300 transition">
             Khôi phục mặc định
           </button>
@@ -960,8 +960,8 @@
           <svg class="w-7 h-7 text-zinc-700" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5" />
           </svg>
-          <p data-i18n="rc_hint_1" class="text-xs font-medium text-zinc-400">Vuốt để di chuột • Bật màn hình PC để chạm, vuốt &amp; phóng to 60Hz</p>
-          <p data-i18n="rc_hint_2" class="text-[11px] text-zinc-600">1 ngón: Di chuột / Chạm • 2 ngón: Phóng to / Cuộn / Chuột phải</p>
+          <p id="rc-hint-1" data-i18n="rc_hint_1" class="text-xs font-medium text-zinc-400">Vuốt để di chuột • Bật màn hình PC để chạm, vuốt &amp; phóng to 60Hz</p>
+          <p id="rc-hint-2" data-i18n="rc_hint_2" class="text-[11px] text-zinc-600">1 ngón: Di chuột / Chạm • 2 ngón: Phóng to / Cuộn / Chuột phải</p>
         </div>
 
         <!-- Unified Full-Surface Touch & Mouse Gesture Layer -->
@@ -979,6 +979,18 @@
             <path d="M4 3L11.5 20L14.2 13.8L20.5 11.2L4 3Z" fill="#7da3c0" stroke="#ffffff" stroke-width="1.8" stroke-linejoin="round" />
           </svg>
         </div>
+
+        <!-- Hidden Desktop Physical Keyboard + Vietnamese IME Composition Trap (PC ↔ PC only) -->
+        <textarea
+          id="rc-desktop-ime-trap"
+          tabindex="-1"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+          aria-hidden="true"
+          class="rc-ime-trap"
+        ></textarea>
 
         <!-- Floating Request Screen Pill (Shown when video isn't active yet) -->
         <button

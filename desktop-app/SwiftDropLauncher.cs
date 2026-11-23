@@ -77,11 +77,18 @@ namespace SwiftDropLauncher
         {
             { "backspace", 0x08 }, { "tab", 0x09 }, { "enter", 0x0D }, { "return", 0x0D },
             { "shift", 0x10 }, { "ctrl", 0x11 }, { "control", 0x11 }, { "alt", 0x12 },
-            { "escape", 0x1B }, { "esc", 0x1B }, { "space", 0x20 }, { " ", 0x20 },
+            { "pause", 0x13 }, { "capslock", 0x14 }, { "escape", 0x1B }, { "esc", 0x1B },
+            { "space", 0x20 }, { " ", 0x20 },
             { "pageup", 0x21 }, { "pagedown", 0x22 }, { "end", 0x23 }, { "home", 0x24 },
             { "arrowleft", 0x25 }, { "left", 0x25 }, { "arrowup", 0x26 }, { "up", 0x26 },
             { "arrowright", 0x27 }, { "right", 0x27 }, { "arrowdown", 0x28 }, { "down", 0x28 },
-            { "delete", 0x2E }, { "del", 0x2E }, { "win", 0x5B }, { "meta", 0x5B }, { "lwin", 0x5B },
+            { "printscreen", 0x2C }, { "insert", 0x2D }, { "delete", 0x2E }, { "del", 0x2E },
+            { "win", 0x5B }, { "meta", 0x5B }, { "lwin", 0x5B },
+            { "f1", 0x70 }, { "f2", 0x71 }, { "f3", 0x72 }, { "f4", 0x73 },
+            { "f5", 0x74 }, { "f6", 0x75 }, { "f7", 0x76 }, { "f8", 0x77 },
+            { "f9", 0x78 }, { "f10", 0x79 }, { "f11", 0x7A }, { "f12", 0x7B },
+            { ";", 0xBA }, { "=", 0xBB }, { "+", 0xBB }, { ",", 0xBC }, { "-", 0xBD }, { "_", 0xBD },
+            { ".", 0xBE }, { "/", 0xBF }, { "`", 0xC0 }, { "[", 0xDB }, { "\\", 0xDC }, { "]", 0xDD }, { "'", 0xDE },
             { "vol_mute", 0xAD }, { "vol_down", 0xAE }, { "vol_up", 0xAF },
             { "media_next", 0xB0 }, { "media_prev", 0xB1 }, { "media_stop", 0xB2 }, { "media_play_pause", 0xB3 }
         };

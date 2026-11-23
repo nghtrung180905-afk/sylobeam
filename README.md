@@ -12,6 +12,8 @@
 
   <p>
     <a href="https://sylobeam.pages.dev/"><strong>Open Web App</strong></a> ·
+    <a href="./docs/SyloBeam-User-Guide-EN.docx"><strong>User Guide (.DOCX)</strong></a> ·
+    <a href="./docs/SyloBeam-Huong-Dan-Su-Dung-VI.docx"><strong>Hướng dẫn Tiếng Việt (.DOCX)</strong></a> ·
     <a href="#how-it-works">How It Works</a> ·
     <a href="#option-2-windows-desktop-app-60hz-dxgi-remote-control--auto-save-folder">Windows App</a> ·
     <a href="https://github.com/nghtrung180905-afk/sylobeam/releases/latest"><strong>Download Release</strong></a> ·
@@ -30,7 +32,7 @@
 * **Instant Pairing:** Open [`sylobeam.pages.dev`](https://sylobeam.pages.dev/) on both devices, scan the QR code or enter the 6-character code, and connect in seconds.
 * **True Peer-to-Peer Speed:** Files stream directly device-to-device via **WebRTC DataChannel** with adaptive `256 KB` LAN / `64 KB` cellular chunking and backpressure flow control — zero RAM crashes even on mobile Safari/Chrome.
 * **Works Behind Strict 4G/5G NAT:** Automatically upgrades or falls back to a stateless **Cloudflare Edge E2EE WebSocket Relay** (Durable Objects) when symmetric mobile NAT blocks direct WebRTC.
-* **60Hz Remote Desktop (PC ↔ Mobile/Web):** Native **DXGI Desktop Duplication (`IDXGIOutputDuplication`)** + WebRTC hardware video encoding + unordered low-latency UDP DataChannel for responsive touch/trackpad mouse, pinch-to-zoom, and full Vietnamese/Unicode keyboard input.
+* **60Hz Remote Desktop (PC ↔ Mobile/iPad & Native PC ↔ PC):** Native **DXGI Desktop Duplication (`IDXGIOutputDuplication`)** + WebRTC hardware video encoding + unordered low-latency UDP DataChannel. Phone & iPad controllers get responsive touch, trackpad & pinch-to-zoom controls, while **PC-to-PC mode (v2.2.0)** supports direct cursor tracking without holding click, 3-button mouse + wheel scroll, and direct physical keyboard/Vietnamese IME typing cleanly without bottom overlay bars.
 * **End-to-End Security:** Encrypted transport (**DTLS 1.3 / AES-256-GCM**), **6-digit SAS** verification code, **two-way explicit consent** before any file transfer or remote control, **SHA-256** per-file integrity check, and instant **`Ctrl + Alt + Esc`** emergency kill switch on PC.
 * **Modern Studio UI:** Built-in **English / Tiếng Việt** language switcher in Settings, dual **Dark Mode** & **Lightning (Light) Mode**, real-time **WebGL 3D NASA Blue Marble Earth** with rotating satellite cloud layer, custom download folder picker, and installable PWA.
 
@@ -133,7 +135,8 @@ npx wrangler deploy
 **SyloBeam** là phần mềm **truyền file P2P tốc độ cao** và **điều khiển máy tính từ xa 60Hz** hoạt động ngay trên trình duyệt & Windows, không cần đăng nhập và không lưu file lên máy chủ trung gian:
 
 * **Truyền ảnh gốc, video, file dung lượng lớn không giới hạn:** Chạy thẳng giữa điện thoại và máy tính qua Wi-Fi/LAN hoặc tự động xuyên mạng 4G/5G.
-* **Điều khiển PC mượt 60Hz từ điện thoại:** Hỗ trợ cảm ứng trực tiếp & trackpad, phóng to/thu nhỏ 2 ngón, gõ tiếng Việt đầy đủ, chụp màn hình siêu nhanh bằng DXGI GPU.
+* **Điều khiển PC mượt 60Hz (ĐT/iPad Cảm ứng & PC ↔ PC Trực tiếp):** Hỗ trợ cảm ứng chạm, Trackpad & phóng to 2 ngón trên Điện thoại/iPad; riêng **PC điều khiển PC (v2.2.0)** tự động ẩn thanh nút thừa để mở rộng màn hình, di chuột tự nhiên không cần nhấn giữ và gõ trực tiếp bằng bàn phím vật lý (hỗ trợ cả tiếng Việt & phím tắt).
+* **Tài liệu Word hướng dẫn chi tiết:** Tải [Hướng dẫn Tiếng Việt (.DOCX)](./docs/SyloBeam-Huong-Dan-Su-Dung-VI.docx) hoặc [English User Guide (.DOCX)](./docs/SyloBeam-User-Guide-EN.docx).
 * **Bảo mật đầu-cuối:** Mã hóa DTLS / AES-256-GCM, mã xác thực 6 số SAS, hỏi xác nhận hai chiều, kiểm tra toàn vẹn SHA-256 từng file và phím tắt ngắt khẩn cấp `Ctrl + Alt + Esc`.
 * **Giao diện song ngữ & 3D:** Hỗ trợ chuyển **Tiếng Việt / English** trong Cài đặt, chế độ tối **Dark** & sáng **Lightning**, mô phỏng Trái Đất 3D vệ tinh NASA theo thời gian thực.
 * **Dùng ngay:** Truy cập **[https://sylobeam.pages.dev/](https://sylobeam.pages.dev/)** hoặc tải bộ cài Windows **`SyloBeam-Setup.exe`** từ trang [Releases](https://github.com/nghtrung180905-afk/sylobeam/releases/latest).

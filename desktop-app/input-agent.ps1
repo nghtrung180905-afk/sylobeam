@@ -98,6 +98,8 @@ public static class SwiftDropWin32 {
         { "f1", 0x70 }, { "f2", 0x71 }, { "f3", 0x72 }, { "f4", 0x73 },
         { "f5", 0x74 }, { "f6", 0x75 }, { "f7", 0x76 }, { "f8", 0x77 },
         { "f9", 0x78 }, { "f10", 0x79 }, { "f11", 0x7A }, { "f12", 0x7B },
+        { ";", 0xBA }, { "=", 0xBB }, { "+", 0xBB }, { ",", 0xBC }, { "-", 0xBD }, { "_", 0xBD },
+        { ".", 0xBE }, { "/", 0xBF }, { "`", 0xC0 }, { "[", 0xDB }, { "\\", 0xDC }, { "]", 0xDD }, { "'", 0xDE },
         { "vol_mute", 0xAD }, { "vol_down", 0xAE }, { "vol_up", 0xAF },
         { "media_next", 0xB0 }, { "media_prev", 0xB1 }, { "media_stop", 0xB2 }, { "media_play_pause", 0xB3 }
     };

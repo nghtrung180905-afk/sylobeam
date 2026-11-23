@@ -530,3 +530,169 @@ html[data-theme="light"] .theme-choice-btn.is-active {
   border-color: #2a5f8a;
   color: #0d131c;
 }
+
+/* ========================================================================= */
+/* v22 Mobile Viewport Lock, Responsive Header/Settings & PC-to-PC Remote   */
+/* ========================================================================= */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+body {
+  touch-action: manipulation;
+  -webkit-text-size-adjust: 100%;
+}
+
+main {
+  overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+@media (max-width: 639px) {
+  .sd-header {
+    padding: max(10px, env(safe-area-inset-top)) 12px 8px !important;
+    gap: 8px 6px !important;
+    justify-content: center !important;
+  }
+
+  .sd-hdr-brand {
+    order: 1 !important;
+    margin-right: auto;
+    min-width: 0;
+    max-width: calc(100% - 114px);
+    gap: 6px !important;
+  }
+
+  .sd-hdr-brand #connection-status-pill {
+    padding: 2px 7px !important;
+    font-size: 10px !important;
+    min-width: 0;
+    max-width: 122px;
+  }
+
+  .sd-hdr-brand #status-text {
+    max-width: 96px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .sd-hdr-actions {
+    display: contents !important;
+  }
+
+  #btn-download-windows-app {
+    display: none !important;
+  }
+
+  #btn-toggle-theme,
+  #btn-toggle-transfers,
+  #btn-open-settings {
+    order: 2 !important;
+    flex-shrink: 0 !important;
+    padding: 7px !important;
+  }
+
+  .sd-hdr-room {
+    order: 3 !important;
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  #btn-copy-link,
+  #btn-open-qr-modal,
+  #btn-native-share,
+  #btn-install-pwa {
+    order: 4 !important;
+    padding: 5px 10px !important;
+    font-size: 11px !important;
+  }
+
+  #settings-modal {
+    padding: 10px !important;
+    align-items: center !important;
+  }
+
+  .sd-settings-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 20px !important;
+  }
+
+  .sd-settings-head {
+    padding: 12px 14px !important;
+    gap: 8px !important;
+  }
+
+  .sd-settings-body {
+    padding: 14px !important;
+    max-height: 82dvh !important;
+    max-height: 82vh !important;
+  }
+
+  .sd-setting-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+
+  .sd-setting-row > .sd-setting-choices {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .sd-setting-row > .sd-setting-choices .theme-choice-btn {
+    flex: 1 1 auto;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+.sd-settings-card,
+.sd-settings-body,
+.sd-setting-row,
+.sd-save-dir-row {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.sd-settings-body {
+  overflow-x: hidden;
+}
+
+.sd-save-dir-row > input {
+  min-width: 0 !important;
+}
+
+.sd-stun-urls {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+#rc-touch-overlay.rc-pc-mode {
+  cursor: default;
+}
+
+.rc-ime-trap {
+  position: fixed;
+  left: -9999px;
+  top: 0;
+  width: 2px;
+  height: 2px;
+  opacity: 0;
+  pointer-events: none;
+  border: 0;
+  padding: 0;
+  resize: none;
+  background: transparent;
+  color: transparent;
+  font-size: 16px;
+}
